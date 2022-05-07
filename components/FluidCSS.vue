@@ -13,18 +13,18 @@
       <div class="text-2xl">Range:</div>
       <div class="col-span-2 flex items-center gap-5 text-xl sm:col-span-1">
         <div>from</div>
-        <Input v-model="minValue" class="max-w-[10rem]" type="text" number />
+        <Input v-model="minValue" class="max-w-[9rem]" type="text" number />
         <div>to</div>
-        <Input v-model="maxValue" class="max-w-[10rem]" type="text" number />
+        <Input v-model="maxValue" class="max-w-[9rem]" type="text" number />
         <div>{{ unit }}</div>
       </div>
 
       <div class="text-2xl">Viewport:</div>
       <div class="col-span-2 flex items-center gap-5 text-xl sm:col-span-1">
         <div>from</div>
-        <Input v-model="minViewport" class="max-w-[10rem]" type="text" number />
+        <Input v-model="minViewport" class="max-w-[9rem]" type="text" number />
         <div>to</div>
-        <Input v-model="maxViewport" class="max-w-[10rem]" type="text" number />
+        <Input v-model="maxViewport" class="max-w-[9rem]" type="text" number />
         <div>{{ unit }}</div>
       </div>
     </div>

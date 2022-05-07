@@ -1,6 +1,6 @@
 <template>
   <header
-    class="sticky flex w-screen items-center bg-base-500 p-2.5 opacity-90"
+    class="sticky top-0 z-50 flex w-screen items-center bg-base-500 p-2.5 opacity-90"
   >
     <nav class="w-full">
       <ul class="flex gap-2">

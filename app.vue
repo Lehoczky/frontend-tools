@@ -4,6 +4,8 @@
   <main class="mx-auto w-11/12 max-w-4xl">
     <PxToRemConverter />
     <FluidCSS />
+    <LunchTime />
+    <Timer />
   </main>
 </template>
 
