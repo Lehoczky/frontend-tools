@@ -10,7 +10,7 @@
 useHead({
   title: "Frontend Tools",
   bodyAttrs: {
-    class: "bg-base-700 prose prose-invert",
+    class: "bg-base-700 font-poppins text-base-300",
   },
 })
 </script>
