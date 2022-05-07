@@ -59,10 +59,11 @@ const replaceDecimals = (value: unknown) => String(value).replace(",", ".")
 /* https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
-  -moz-appearance: textfield;
+  appearance: textfield;
 }
 </style>
