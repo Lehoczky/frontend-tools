@@ -22,6 +22,9 @@ module.exports = {
         "article-heading":
           "clamp(1rem, calc(1rem + ((1vw - 0.4rem) * 2.2321)), 2.25rem)",
       },
+      transitionDuration: {
+        250: "250ms",
+      },
     },
   },
   corePlugins: {

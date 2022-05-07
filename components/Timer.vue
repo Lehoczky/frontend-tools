@@ -8,39 +8,80 @@
         :class="{
           'text-opacity-50': editing,
         }"
-        @click="input.focus()"
+        @click="focusInput()"
       >
-        <div :class="{ 'opacity-50': editing && rawValue.length <= 5 }">
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length <= 5,
+            'opacity-0': !editing && numbers[0] === 0 && rawValue.length <= 5,
+          }"
+        >
           {{ numbers[0] }}
         </div>
-        <div :class="{ 'opacity-50': editing && rawValue.length <= 4 }">
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length <= 4,
+            'opacity-0': !editing && numbers[1] === 0 && rawValue.length <= 4,
+          }"
+        >
           {{ numbers[1] }}
         </div>
         <div
           class="mr-2"
-          :class="{ 'opacity-50': editing && rawValue.length <= 4 }"
+          :class="{
+            'opacity-50': editing && rawValue.length <= 4,
+            'opacity-0': !editing && numbers[1] === 0 && rawValue.length <= 4,
+          }"
         >
           h
         </div>
-        <div :class="{ 'opacity-50': editing && rawValue.length <= 3 }">
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length <= 3,
+            'opacity-0': !editing && numbers[2] === 0 && rawValue.length <= 3,
+          }"
+        >
           {{ numbers[2] }}
         </div>
-        <div :class="{ 'opacity-50': editing && rawValue.length <= 2 }">
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length <= 2,
+            'opacity-0': !editing && numbers[3] === 0 && rawValue.length <= 2,
+          }"
+        >
           {{ numbers[3] }}
         </div>
         <div
           class="mr-2"
-          :class="{ 'opacity-50': editing && rawValue.length <= 2 }"
+          :class="{
+            'opacity-50': editing && rawValue.length <= 2,
+            'opacity-0': !editing && numbers[3] === 0 && rawValue.length <= 2,
+          }"
         >
           m
         </div>
-        <div :class="{ 'opacity-50': editing && rawValue.length <= 1 }">
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length <= 1,
+            'opacity-0': !editing && numbers[4] === 0 && rawValue.length <= 1,
+          }"
+        >
           {{ numbers[4] }}
         </div>
-        <div :class="{ 'opacity-50': editing && rawValue.length === 0 }">
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length === 0,
+          }"
+        >
           {{ numbers[5] }}
         </div>
-        <div :class="{ 'opacity-50': editing && rawValue.length === 0 }">s</div>
+        <div
+          :class="{
+            'opacity-50': editing && rawValue.length === 0,
+          }"
+        >
+          s
+        </div>
 
         <input
           ref="input"
@@ -55,15 +96,49 @@
       </div>
 
       <button
-        class="rounded-md bg-sky-800 px-4 py-2 active:scale-95 disabled:opacity-50 disabled:active:scale-100"
-        :disabled="buttonDisabled"
-        @click="startCountdown()"
+        class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
+        :disabled="countingDown"
+        @click="rawValue = '500'"
       >
-        Start
+        <IconTea class="h-5 w-5 fill-current" />
+        Chamomile tea
       </button>
+
+      <button
+        class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
+        :disabled="countingDown"
+        @click="rawValue = '800'"
+      >
+        <IconTea class="h-5 w-5 fill-current" />
+        Fruit tea
+      </button>
+
+      <div class="relative h-10">
+        <Transition name="slide-up">
+          <button
+            v-if="!countingDown"
+            class="absolute inline-flex items-center gap-1.5 rounded-md bg-sky-800 px-4 py-2 will-change-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
+            :disabled="startButtonDisabled"
+            @click="startCountdown()"
+          >
+            Start
+            <IconPlay />
+          </button>
+
+          <button
+            v-else
+            class="absolute inline-flex items-center gap-1.5 rounded-md bg-rose-800 px-4 py-2 will-change-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
+            :disabled="!countingDown"
+            @click="pauseCountdown()"
+          >
+            Pause
+            <IconPause />
+          </button>
+        </Transition>
+      </div>
     </div>
 
-    <Transition>
+    <Transition name="slide-left">
       <div
         v-if="showNotification"
         class="notification fixed top-20 right-7 grid grid-cols-[min-content_auto] gap-x-9 gap-y-2 rounded-md py-2.5 pl-4 pr-10 text-sm"
@@ -90,17 +165,23 @@ import { beep, isDigit } from "~~/utils"
 const MAX_INPUT_LENGTH = 6
 const input = ref<HTMLInputElement>()
 const editing = ref(false)
-const rawValue = ref("")
-const numbers = ref<number[]>([0, 0, 0, 0, 0, 0])
+const rawValue = ref("800")
+const numbers = ref<number[]>([])
 const parsedSeconds = ref(0)
 const title = useTitle()
 const originalTitle = title.value
 const countingDown = ref(false)
+let countdownTimeout: ReturnType<typeof setTimeout> | undefined = undefined
 const showNotification = ref(false)
 const beepingInterval = useIntervalFn(beep, 2500, {
   immediate: false,
   immediateCallback: true,
 })
+
+const focusInput = () => {
+  input.value.selectionStart = input.value.value.length
+  input.value.focus()
+}
 
 const preventNonNumericInput = (event: KeyboardEvent) => {
   if (!isDigit(event.key)) {
@@ -108,24 +189,34 @@ const preventNonNumericInput = (event: KeyboardEvent) => {
   }
 }
 
-watch(rawValue, (newValue) => {
-  const valueAsNumbers = Array.from(newValue, Number)
-  const numOfLeadingZeros = MAX_INPUT_LENGTH - newValue.length
-  const leadingZeros = Array(numOfLeadingZeros).fill(0, 0, numOfLeadingZeros)
-  numbers.value = [...leadingZeros, ...valueAsNumbers]
+watch(
+  rawValue,
+  (newValue) => {
+    const valueAsNumbers = Array.from(newValue, Number)
+    const numOfLeadingZeros = MAX_INPUT_LENGTH - newValue.length
+    const leadingZeros = Array(numOfLeadingZeros).fill(0, 0, numOfLeadingZeros)
+    numbers.value = [...leadingZeros, ...valueAsNumbers]
 
-  const [h1, h2, m1, m2, s1, s2] = numbers.value
-  const hours = h1 * 10 + h2
-  const minutes = m1 * 10 + m2
-  const seconds = s1 * 10 + s2
-  parsedSeconds.value = hours * 60 * 60 + minutes * 60 + seconds
-})
+    const [h1, h2, m1, m2, s1, s2] = numbers.value
+    const hours = h1 * 10 + h2
+    const minutes = m1 * 10 + m2
+    const seconds = s1 * 10 + s2
+    parsedSeconds.value = hours * 60 * 60 + minutes * 60 + seconds
+  },
+  { immediate: true }
+)
 
 const startCountdown = () => {
   countingDown.value = true
   const time = secondsInReadableForm(parsedSeconds.value)
   title.value = `${time} - ${originalTitle}`
-  setTimeout(() => decrementTime(), 1000)
+  countdownTimeout = setTimeout(() => decrementTime(), 1000)
+}
+
+const pauseCountdown = () => {
+  countingDown.value = false
+  title.value = originalTitle
+  clearTimeout(countdownTimeout)
 }
 
 const decrementTime = () => {
@@ -133,7 +224,7 @@ const decrementTime = () => {
     const seconds = parsedSeconds.value - 1
     rawValue.value = secondstoRawValue(seconds)
     title.value = `${secondsInReadableForm(seconds)} - ${originalTitle}`
-    setTimeout(() => decrementTime(), 1000)
+    countdownTimeout = setTimeout(() => decrementTime(), 1000)
   } else {
     countingDown.value = false
     rawValue.value = ""
@@ -164,7 +255,7 @@ const secondstoRawValue = (total_seconds: number) => {
   return dropWhile(timeAsStringWithLeadingZeros, (x) => x === "0").join("")
 }
 
-const buttonDisabled = computed(
+const startButtonDisabled = computed(
   () => countingDown.value || parsedSeconds.value === 0
 )
 
@@ -180,13 +271,26 @@ const closeNotificationAndStopBeeping = () => {
 </script>
 
 <style scoped>
-.v-enter-active,
-.v-leave-active {
+.slide-up-enter-active,
+.slide-up-leave-active {
+  @apply transition duration-250 ease-out;
+}
+
+.slide-up-enter-from {
+  @apply translate-y-7 opacity-0;
+}
+
+.slide-up-leave-to {
+  @apply -translate-y-7 opacity-0;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
   @apply transition;
 }
 
-.v-enter-from,
-.v-leave-to {
+.slide-left-enter-from,
+.slide-left-leave-to {
   @apply translate-x-7 opacity-0;
 }
 
