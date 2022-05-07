@@ -1,8 +1,9 @@
 <template>
   <Header />
 
-  <main>
+  <main class="mx-auto w-11/12 max-w-4xl">
     <PxToRemConverter />
+    <FluidCSS />
   </main>
 </template>
 

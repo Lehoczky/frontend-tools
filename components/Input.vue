@@ -3,12 +3,12 @@
     <input
       v-bind="$attrs"
       v-model="value"
-      class="w-full rounded-md bg-base-500 px-5 py-4 text-center text-4xl outline-none ring-gray-500 focus:ring"
+      class="w-full rounded-md bg-base-500 px-5 py-4 text-center outline-none ring-gray-500 focus:ring"
     />
 
     <div
       v-if="suffix"
-      class="absolute top-1/2 right-6 -translate-y-1/2 text-lg leading-none"
+      class="absolute top-1/2 right-6 -translate-y-1/2 leading-none text-lg"
     >
       {{ suffix }}
     </div>
