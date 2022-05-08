@@ -1,6 +1,6 @@
 <template>
   <article class="p-article">
-    <h2 class="mb-article-heading text-3xl">Fluid CSS calulator</h2>
+    <h2 class="mb-article-heading text-3xl">Fluid CSS calculator</h2>
     <div class="grid grid-cols-[auto_1fr] items-center gap-7">
       <div class="text-2xl">Units:</div>
       <div class="col-span-2 sm:col-span-1">
@@ -58,7 +58,7 @@ const minValueInREM = computed(() =>
     : toREMWithFixedPrecision(minValue.value)
 )
 const valueDifference = computed(() => maxValue.value - minValue.value)
-const viewportDifferene = computed(() => maxViewport.value - minViewport.value)
+const viewportDifference = computed(() => maxViewport.value - minViewport.value)
 
 /**
  * calculation = calc(ZZ + ((1vw - XX) * YY))
@@ -71,7 +71,7 @@ const viewportDifferene = computed(() => maxViewport.value - minViewport.value)
  */
 const css = computed(() => {
   const XX = minViewport.value / 100
-  const YY = round((100 * valueDifference.value) / viewportDifferene.value, 4)
+  const YY = round((100 * valueDifference.value) / viewportDifference.value, 4)
   const ZZ = minValueInREM.value
   const fluidCalculation = `calc(${ZZ}rem + ((1vw - ${XX}${unit.value}) * ${YY}))`
   return `clamp(${minValue.value}${unit.value}, ${fluidCalculation}, ${maxValue.value}${unit.value})`

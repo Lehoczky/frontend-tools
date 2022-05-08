@@ -222,7 +222,7 @@ const pauseCountdown = () => {
 const decrementTime = () => {
   if (parsedSeconds.value > 1) {
     const seconds = parsedSeconds.value - 1
-    rawValue.value = secondstoRawValue(seconds)
+    rawValue.value = secondsToRawValue(seconds)
     title.value = `${secondsInReadableForm(seconds)} - Frontend Tools`
     countdownTimeout = setTimeout(() => decrementTime(), 1000)
   } else {
@@ -244,7 +244,7 @@ const secondsInReadableForm = (total_seconds: number) => {
     .join(":")
 }
 
-const secondstoRawValue = (total_seconds: number) => {
+const secondsToRawValue = (total_seconds: number) => {
   const hours = Math.floor(total_seconds / 3600)
   const minutes = Math.floor(total_seconds / 60) % 60
   const seconds = total_seconds % 60
