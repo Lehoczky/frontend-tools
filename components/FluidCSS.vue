@@ -34,9 +34,9 @@
     </div>
 
     <div
-      class="relative mt-5 rounded-sm bg-base-800 py-5 pl-5 pr-14 text-white"
+      class="relative mt-5 min-h-[4rem] rounded-sm bg-base-800 py-5 pl-5 pr-14 text-white"
     >
-      <code>{{ css }}</code>
+      <code class="leading-none">{{ css }}</code>
 
       <button class="absolute right-5 top-5 active:scale-95" @click="copy()">
         <IconCopy />
@@ -63,6 +63,9 @@ const minValueInREM = computed(() =>
 )
 const valueDifference = computed(() => maxValue.value - minValue.value)
 const viewportDifference = computed(() => maxViewport.value - minViewport.value)
+const hideCSS = computed(
+  () => isNaN(valueDifference.value) || isNaN(viewportDifference.value)
+)
 
 /**
  * calculation = calc(ZZ + ((1vw - XX) * YY))
@@ -74,6 +77,9 @@ const viewportDifference = computed(() => maxViewport.value - minViewport.value)
  * @see {@link https://websemantics.uk/tools/responsive-font-calculator/}
  */
 const css = computed(() => {
+  if (hideCSS.value) {
+    return ""
+  }
   const XX = minViewport.value / 100
   const YY = round((100 * valueDifference.value) / viewportDifference.value, 4)
   const ZZ = minValueInREM.value

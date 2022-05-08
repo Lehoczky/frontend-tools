@@ -6,7 +6,7 @@ module.exports = {
     "./composables/**/*.{js,ts}",
     "./plugins/**/*.{js,ts}",
     "./App.{js,ts,vue}",
-    "./app.{js,ts,vue}"
+    "./app.{js,ts,vue}",
   ],
   theme: {
     extend: {
@@ -30,6 +30,9 @@ module.exports = {
       margin: {
         "article-heading":
           "clamp(1rem, calc(1rem + ((1vw - 0.4rem) * 2.2321)), 2.25rem)",
+      },
+      boxShadow: {
+        header: "0 0 10px 0 #00000029",
       },
       transitionDuration: {
         250: "250ms",
