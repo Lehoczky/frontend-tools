@@ -1,7 +1,7 @@
 <template>
   <Header />
 
-  <main class="mx-auto w-11/12 max-w-4xl">
+  <main class="mx-auto w-[95%] max-w-4xl sm:w-11/12">
     <PxToRemConverter />
     <FluidCSS />
     <LunchTime />

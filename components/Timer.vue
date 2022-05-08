@@ -8,7 +8,7 @@
 
     <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-end">
       <div
-        class="flex rounded-md bg-base-500 px-5 py-4 outline-none ring-gray-600 text-xl focus-within:ring"
+        class="flex cursor-text rounded-md bg-base-500 px-5 py-4 outline-none ring-gray-600 text-xl focus-within:ring"
         :class="{
           'text-opacity-50': editing,
         }"
@@ -99,48 +99,46 @@
         />
       </div>
 
-      <div class="flex gap-4">
-        <button
-          class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
-          :disabled="countingDown"
-          @click="rawValue = '500'"
-        >
-          <IconTea class="h-5 w-5 fill-current" />
-          Chamomile tea
-        </button>
+      <button
+        class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
+        :disabled="countingDown"
+        @click="rawValue = '500'"
+      >
+        <IconTea class="h-5 w-5 fill-current" />
+        Chamomile tea
+      </button>
 
-        <button
-          class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
-          :disabled="countingDown"
-          @click="rawValue = '800'"
-        >
-          <IconTea class="h-5 w-5 fill-current" />
-          Fruit tea
-        </button>
+      <button
+        class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
+        :disabled="countingDown"
+        @click="rawValue = '800'"
+      >
+        <IconTea class="h-5 w-5 fill-current" />
+        Fruit tea
+      </button>
 
-        <div class="relative h-10">
-          <Transition name="slide-up">
-            <button
-              v-if="!countingDown"
-              class="absolute inline-flex items-center gap-1.5 rounded-md bg-sky-800 px-4 py-2 will-change-transform hover:bg-sky-700 active:scale-95 disabled:opacity-50 disabled:active:scale-100"
-              :disabled="startButtonDisabled"
-              @click="startCountdown()"
-            >
-              Start
-              <IconPlay />
-            </button>
+      <div class="relative h-10">
+        <Transition name="slide-up">
+          <button
+            v-if="!countingDown"
+            class="absolute inline-flex items-center gap-1.5 rounded-md bg-sky-800 px-4 py-2 will-change-transform hover:bg-sky-700 active:scale-95 disabled:opacity-50 disabled:hover:bg-sky-800 disabled:active:scale-100"
+            :disabled="startButtonDisabled"
+            @click="startCountdown()"
+          >
+            Start
+            <IconPlay />
+          </button>
 
-            <button
-              v-else
-              class="absolute inline-flex items-center gap-1.5 rounded-md bg-rose-800 px-4 py-2 will-change-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
-              :disabled="!countingDown"
-              @click="pauseCountdown()"
-            >
-              Pause
-              <IconPause />
-            </button>
-          </Transition>
-        </div>
+          <button
+            v-else
+            class="absolute inline-flex items-center gap-1.5 rounded-md bg-rose-800 px-4 py-2 will-change-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
+            :disabled="!countingDown"
+            @click="pauseCountdown()"
+          >
+            Pause
+            <IconPause />
+          </button>
+        </Transition>
       </div>
     </div>
 
