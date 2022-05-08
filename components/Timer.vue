@@ -1,5 +1,9 @@
 <template>
   <article class="p-article">
+    <Head>
+      <Title>{{ title }}</Title>
+    </Head>
+
     <h2 class="mb-article-heading text-3xl">Timer</h2>
 
     <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-end">
@@ -159,7 +163,6 @@
 </template>
 
 <script setup lang="ts">
-import { useTitle } from "@vueuse/core"
 import { dropWhile } from "lodash-es"
 
 import { beep, isDigit } from "~~/utils"
@@ -167,11 +170,8 @@ import { beep, isDigit } from "~~/utils"
 const MAX_INPUT_LENGTH = 6
 const input = ref<HTMLInputElement>()
 const editing = ref(false)
-const rawValue = ref("800")
-const numbers = ref<number[]>([])
-const parsedSeconds = ref(0)
-const title = useTitle()
-const originalTitle = title.value
+const rawValue = ref("")
+const title = ref("Frontend Tools")
 const countingDown = ref(false)
 let countdownTimeout: ReturnType<typeof setTimeout> | undefined = undefined
 const showNotification = ref(false)
@@ -191,33 +191,31 @@ const preventNonNumericInput = (event: KeyboardEvent) => {
   }
 }
 
-watch(
-  rawValue,
-  (newValue) => {
-    const valueAsNumbers = Array.from(newValue, Number)
-    const numOfLeadingZeros = MAX_INPUT_LENGTH - newValue.length
-    const leadingZeros = Array(numOfLeadingZeros).fill(0, 0, numOfLeadingZeros)
-    numbers.value = [...leadingZeros, ...valueAsNumbers]
+const numbers = computed(() => {
+  const valueAsNumbers = Array.from(rawValue.value, Number)
+  const numOfLeadingZeros = MAX_INPUT_LENGTH - rawValue.value.length
+  const leadingZeros = Array(numOfLeadingZeros).fill(0, 0, numOfLeadingZeros)
+  return [...leadingZeros, ...valueAsNumbers]
+})
 
-    const [h1, h2, m1, m2, s1, s2] = numbers.value
-    const hours = h1 * 10 + h2
-    const minutes = m1 * 10 + m2
-    const seconds = s1 * 10 + s2
-    parsedSeconds.value = hours * 60 * 60 + minutes * 60 + seconds
-  },
-  { immediate: true }
-)
+const parsedSeconds = computed(() => {
+  const [h1, h2, m1, m2, s1, s2] = numbers.value
+  const hours = h1 * 10 + h2
+  const minutes = m1 * 10 + m2
+  const seconds = s1 * 10 + s2
+  return hours * 60 * 60 + minutes * 60 + seconds
+})
 
 const startCountdown = () => {
   countingDown.value = true
   const time = secondsInReadableForm(parsedSeconds.value)
-  title.value = `${time} - ${originalTitle}`
+  title.value = `${time} - Frontend Tools`
   countdownTimeout = setTimeout(() => decrementTime(), 1000)
 }
 
 const pauseCountdown = () => {
   countingDown.value = false
-  title.value = originalTitle
+  title.value = "Frontend Tools"
   clearTimeout(countdownTimeout)
 }
 
@@ -225,12 +223,12 @@ const decrementTime = () => {
   if (parsedSeconds.value > 1) {
     const seconds = parsedSeconds.value - 1
     rawValue.value = secondstoRawValue(seconds)
-    title.value = `${secondsInReadableForm(seconds)} - ${originalTitle}`
+    title.value = `${secondsInReadableForm(seconds)} - Frontend Tools`
     countdownTimeout = setTimeout(() => decrementTime(), 1000)
   } else {
     countingDown.value = false
     rawValue.value = ""
-    title.value = originalTitle
+    title.value = "Frontend Tools"
     showNotificationAndStartBeeping()
   }
 }
