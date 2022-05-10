@@ -5,21 +5,17 @@
     <div
       class="grid place-content-start place-items-center gap-5 sm:grid-flow-col"
     >
-      <Input
+      <NumberInput
         :model-value="px"
         class="text-4xl"
-        type="text"
         suffix="px"
-        number
         @update:model-value="handlePXInput($event)"
       />
       <IconArrowSwitch class="rotate-90 text-gray-500 sm:rotate-0" />
-      <Input
+      <NumberInput
         :model-value="rem"
         class="text-4xl"
-        type="text"
         suffix="rem"
-        number
         @update:model-value="handleREMInput($event)"
       />
     </div>
@@ -32,11 +28,13 @@ import { toPX, toREMWithFixedPrecision } from "~~/utils"
 const px = ref<number>()
 const rem = ref<number>()
 
-const handlePXInput = (value: string) => {
+const handlePXInput = (value: number) => {
+  px.value = value
   rem.value = value ? toREMWithFixedPrecision(value) : undefined
 }
 
-const handleREMInput = (value: string) => {
+const handleREMInput = (value: number) => {
+  rem.value = value
   px.value = value ? toPX(value) : undefined
 }
 </script>

@@ -15,9 +15,9 @@
         class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
       >
         <div>from</div>
-        <Input v-model="minValue" class="max-w-[9rem]" type="text" number />
+        <NumberInput v-model="minValue" class="max-w-[9rem]" />
         <div>to</div>
-        <Input v-model="maxValue" class="max-w-[9rem]" type="text" number />
+        <NumberInput v-model="maxValue" class="max-w-[9rem]" />
         <div>{{ unit }}</div>
       </div>
 
@@ -26,9 +26,9 @@
         class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
       >
         <div>from</div>
-        <Input v-model="minViewport" class="max-w-[9rem]" type="text" number />
+        <NumberInput v-model="minViewport" class="max-w-[9rem]" />
         <div>to</div>
-        <Input v-model="maxViewport" class="max-w-[9rem]" type="text" number />
+        <NumberInput v-model="maxViewport" class="max-w-[9rem]" />
         <div>{{ unit }}</div>
       </div>
     </div>
