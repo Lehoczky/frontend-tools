@@ -161,9 +161,7 @@
 </template>
 
 <script setup lang="ts">
-import { dropWhile } from "lodash-es"
-
-import { beep, isDigit } from "~~/utils"
+import { beep, dropLeadingZeros, isDigit, secondsToDuration } from "~~/utils"
 
 const MAX_INPUT_LENGTH = 6
 const input = ref<HTMLInputElement>()
@@ -231,10 +229,8 @@ const decrementTime = () => {
   }
 }
 
-const secondsInReadableForm = (total_seconds: number) => {
-  const hours = Math.floor(total_seconds / 3600)
-  const minutes = Math.floor(total_seconds / 60) % 60
-  const seconds = total_seconds % 60
+const secondsInReadableForm = (totalSeconds: number) => {
+  const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
 
   return [hours, minutes, seconds]
     .map((v) => (v < 10 ? "0" + v : v))
@@ -242,15 +238,13 @@ const secondsInReadableForm = (total_seconds: number) => {
     .join(":")
 }
 
-const secondsToRawValue = (total_seconds: number) => {
-  const hours = Math.floor(total_seconds / 3600)
-  const minutes = Math.floor(total_seconds / 60) % 60
-  const seconds = total_seconds % 60
+const secondsToRawValue = (totalSeconds: number) => {
+  const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
   const timeAsStringWithLeadingZeros = [hours, minutes, seconds]
     .map((v) => (v < 10 ? "0" + v : v))
     .join("")
 
-  return dropWhile(timeAsStringWithLeadingZeros, (x) => x === "0").join("")
+  return dropLeadingZeros(timeAsStringWithLeadingZeros)
 }
 
 const startButtonDisabled = computed(

@@ -38,7 +38,11 @@
     >
       <code class="leading-none">{{ css }}</code>
 
-      <button class="absolute right-5 top-5 active:scale-95" @click="copy()">
+      <button
+        class="absolute right-5 top-5 active:scale-95"
+        aria-label="Copy CSS"
+        @click="copy()"
+      >
         <IconCopy />
       </button>
     </div>

@@ -12,6 +12,9 @@
 <script setup>
 useHead({
   title: "Frontend Tools",
+  htmlAttrs: {
+    lang: "en-US",
+  },
   bodyAttrs: {
     class: "bg-base-700 font-poppins text-base-300",
   },
