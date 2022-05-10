@@ -46,8 +46,6 @@ const value = computed<number>({
     return props.modelValue == undefined ? undefined : Number(props.modelValue)
   },
   set(inputValue: unknown) {
-    console.log(inputValue)
-
     const value = String(inputValue)
     if (value === "-") {
       // The user wants to type in a negative number, we don't
@@ -57,7 +55,6 @@ const value = computed<number>({
 
     let number = value ? Number(replaceDecimals(value)) : undefined
     number = isNaN(number) ? undefined : number
-    console.log(number)
 
     emit("update:modelValue", number)
   },
@@ -65,12 +62,10 @@ const value = computed<number>({
 
 const handleKeydownEvent = (event: KeyboardEvent) => {
   if (event.key === "ArrowDown") {
-    console.log(value.value - 1)
-
-    value.value -= 1
+    value.value = value.value === undefined ? -1 : value.value - 1
     event.preventDefault()
   } else if (event.key === "ArrowUp") {
-    value.value += 1
+    value.value = value.value === undefined ? 1 : value.value + 1
     event.preventDefault()
   }
 }
