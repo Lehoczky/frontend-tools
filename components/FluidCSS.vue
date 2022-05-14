@@ -39,7 +39,7 @@
       <code class="leading-none">{{ css }}</code>
 
       <button
-        class="absolute right-5 top-5 active:scale-95"
+        class="absolute right-5 top-5 active:scale-90"
         aria-label="Copy CSS"
         @click="copy()"
       >

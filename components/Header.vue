@@ -3,7 +3,7 @@
     class="sticky top-0 z-50 flex h-16 items-center bg-base-500 p-2.5 shadow-header sm:h-auto sm:opacity-95"
   >
     <nav class="mr-6 flex w-full items-center justify-between">
-      <button class="sm:hidden" @click="open = !open">
+      <button class="p-3 sm:hidden" @click="open = !open">
         <IconClose v-if="open" />
         <IconMenu v-else />
       </button>
@@ -13,21 +13,21 @@
       >
         <li>
           <NuxtLink
-            class="transition-color inline-flex w-full items-center py-4 px-4 ease-out hover:bg-base-400 active:scale-95 sm:rounded-md sm:py-2"
-            to="https://imagecolorpicker.com/en"
-            target="_blank"
-            @click="open = false"
-            >Color Picker<IconExternal class="ml-2.5"
-          /></NuxtLink>
-        </li>
-
-        <li>
-          <NuxtLink
             class="transition-color inline-flex w-full items-center py-5 px-4 ease-out hover:bg-base-400 active:scale-95 sm:rounded-md sm:py-2"
             to="https://jakearchibald.github.io/svgomg/"
             target="_blank"
             @click="open = false"
             >SVG optimizer<IconExternal class="ml-2.5"
+          /></NuxtLink>
+        </li>
+
+        <li>
+          <NuxtLink
+            class="transition-color inline-flex w-full items-center py-4 px-4 ease-out hover:bg-base-400 active:scale-95 sm:rounded-md sm:py-2"
+            to="https://imagecolorpicker.com/en"
+            target="_blank"
+            @click="open = false"
+            >Color Picker<IconExternal class="ml-2.5"
           /></NuxtLink>
         </li>
 
