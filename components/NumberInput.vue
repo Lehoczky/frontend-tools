@@ -19,6 +19,8 @@
 </template>
 
 <script lang="ts">
+import { endsWithDot, hasOneDot, startsWithDigit } from "~~/utils"
+
 export default {
   inheritAttrs: false,
 }
@@ -47,16 +49,21 @@ const value = computed<number>({
   },
   set(inputValue: unknown) {
     const value = String(inputValue)
-    if (value === "-") {
-      // The user wants to type in a negative number, we don't
-      // want to emit a new value at this state
+    if (
+      isTryingToTypeNegativeNumber(value) ||
+      isTryingToTypeFloatNumber(value)
+    ) {
       return
     }
 
-    let number = value ? Number(replaceDecimals(value)) : undefined
-    number = isNaN(number) ? undefined : number
-
-    emit("update:modelValue", number)
+    const number = value ? Number(replaceDecimals(value)) : undefined
+    if (isNaN(number)) {
+      // Something wrong has been typed in, but we don't want to clear
+      // the input, so we pretend nothing happened
+      return
+    } else {
+      emit("update:modelValue", number)
+    }
   },
 })
 
@@ -68,6 +75,14 @@ const handleKeydownEvent = (event: KeyboardEvent) => {
     value.value = value.value === undefined ? 1 : value.value + 1
     event.preventDefault()
   }
+}
+
+const isTryingToTypeNegativeNumber = (value: string) => {
+  return value === "-"
+}
+
+const isTryingToTypeFloatNumber = (value: string): boolean => {
+  return startsWithDigit(value) && hasOneDot(value) && endsWithDot(value)
 }
 
 const replaceDecimals = (value: unknown) => String(value).replace(",", ".")

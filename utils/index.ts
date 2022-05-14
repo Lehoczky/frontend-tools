@@ -1,4 +1,4 @@
-import { round, dropWhile } from "lodash-es"
+import { round, dropWhile, first, countBy } from "lodash-es"
 
 export const toREMWithFixedPrecision = (number: unknown, precision = 3) => {
   return round(Number(number) / 16, precision)
@@ -7,6 +7,12 @@ export const toREMWithFixedPrecision = (number: unknown, precision = 3) => {
 export const toPX = (number: unknown) => Number(number) * 16
 
 export const isDigit = (string: string) => /^\d+$/.test(string)
+
+export const startsWithDigit = (string: string) => isDigit(first(string))
+
+export const hasOneDot = (string: string) => countBy(string)["."] === 1
+
+export const endsWithDot = (string: string) => string.endsWith(".")
 
 export const beep = () => {
   const snd = new Audio(
