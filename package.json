@@ -2,6 +2,10 @@
   "private": true,
   "scripts": {
     "dev": "nuxt dev",
+    "lint": "npm run eslint:check && npm run styles:check && npm run format:check",
+    "eslint:check": "eslint . --ext .js,.ts,.vue --max-warnings=0",
+    "styles:check": "stylelint \"./**/*.{css,vue}\" --ignore-path=.gitignore",
+    "format:check": "prettier \"./**\" --check --ignore-path=.gitignore --ignore-unknown",
     "generate": "cross-env NODE_ENV=production nuxt generate",
     "preview": "serve .output/public",
     "deploy": "gh-pages -d dist -t true"
@@ -17,8 +21,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-vue": "^8.7.1",
-    "gh-pages": "^3.2.3",
-    "nuxt": "3.0.0-rc.2",
+    "gh-pages": "^4.0.0",
+    "nuxt": "3.0.0-rc.3",
     "postcss-html": "^1.4.1",
     "prettier": "^2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.10",

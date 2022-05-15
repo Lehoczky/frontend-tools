@@ -1,4 +1,4 @@
-import { round, dropWhile, first, countBy } from "lodash-es"
+import { countBy, dropWhile, first, round } from "lodash-es"
 
 export const toREMWithFixedPrecision = (number: unknown, precision = 3) => {
   return round(Number(number) / 16, precision)
