@@ -49,6 +49,10 @@ const value = computed<number>({
   },
   set(inputValue: unknown) {
     const value = String(inputValue)
+    if (value === "") {
+      emit("update:modelValue", undefined)
+      return
+    }
     if (
       isTryingToTypeNegativeNumber(value) ||
       isTryingToTypeFloatNumber(value)

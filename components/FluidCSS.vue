@@ -36,10 +36,38 @@
     <div
       class="relative mt-5 min-h-[4rem] rounded-sm bg-base-800 py-5 pl-5 pr-14 text-white"
     >
-      <code class="leading-none">{{ css }}</code>
+      <code class="leading-none">
+        <template v-if="!hideCSS">
+          <span class="text-[#56b6c2]">clamp</span
+          ><span class="text-[#c678dd]">(</span
+          ><span class="text-[#d19a66]">{{ minValue }}</span
+          ><span class="text-[#e06c75]">{{ unit }}</span
+          ><span class="text-[#abb2bf]">, </span
+          ><span class="text-[#56b6c2]">calc(</span
+          ><span class="text-[#d19a66]">{{ z }}</span
+          ><span class="text-[#e06c75]">rem</span
+          ><span class="text-[#56b6c2]"> + </span
+          ><span class="text-[#d19a66]">(</span
+          ><span class="text-[#c678dd]">(</span
+          ><span class="text-[#d19a66]">1</span
+          ><span class="text-[#e06c75]">vw</span
+          ><span class="text-[#56b6c2]"> - </span
+          ><span class="text-[#d19a66]">{{ x }}</span
+          ><span class="text-[#e06c75]">{{ unit }}</span
+          ><span class="text-[#c678dd]">)</span
+          ><span class="text-[#56b6c2]"> * </span
+          ><span class="text-[#d19a66]">{{ y }}</span
+          ><span class="text-[#d19a66]">)</span
+          ><span class="text-[#56b6c2]">)</span
+          ><span class="text-[#abb2bf]">, </span
+          ><span class="text-[#d19a66]">{{ maxValue }}</span
+          ><span class="text-[#e06c75]">{{ unit }}</span
+          ><span class="text-[#c678dd]">)</span>
+        </template>
+      </code>
 
       <button
-        class="absolute right-5 top-5 active:scale-90"
+        class="absolute right-5 top-5 text-[#abb2bf] hover:text-white active:scale-90"
         aria-label="Copy CSS"
         @click="copy()"
       >
@@ -60,23 +88,29 @@ const maxValue = ref(1.5)
 const minViewport = ref(40)
 const maxViewport = ref(120)
 
-const minValueInREM = computed(() =>
-  unit.value === "rem"
-    ? minValue.value
-    : toREMWithFixedPrecision(minValue.value)
-)
 const valueDifference = computed(() => maxValue.value - minValue.value)
 const viewportDifference = computed(() => maxViewport.value - minViewport.value)
 const hideCSS = computed(
   () => isNaN(valueDifference.value) || isNaN(viewportDifference.value)
 )
 
+const x = computed(() => round(minViewport.value / 100, 4))
+const y = computed(() =>
+  round((100 * valueDifference.value) / viewportDifference.value, 4)
+)
+const z = computed(() =>
+  unit.value === "rem"
+    ? minValue.value
+    : toREMWithFixedPrecision(minValue.value)
+)
+
 /**
- * calculation = calc(ZZ + ((1vw - XX) * YY))
- * Where  XX = min_viewport / 100
- *        YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
+ * calculation = calc(z + ((1vw - x) * y))
+ *
+ * Where  x = min_viewport / 100
+ *        y = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
  *           = 100 * font_size_difference / viewport_difference
- *        ZZ = Minimum font-size stated in REM
+ *        z = Minimum font-size stated in REM
  *
  * @see {@link https://websemantics.uk/tools/responsive-font-calculator/}
  */
@@ -84,10 +118,7 @@ const css = computed(() => {
   if (hideCSS.value) {
     return ""
   }
-  const XX = minViewport.value / 100
-  const YY = round((100 * valueDifference.value) / viewportDifference.value, 4)
-  const ZZ = minValueInREM.value
-  const fluidCalculation = `calc(${ZZ}rem + ((1vw - ${XX}${unit.value}) * ${YY}))`
+  const fluidCalculation = `calc(${z.value}rem + ((1vw - ${x.value}${unit.value}) * ${y.value}))`
   return `clamp(${minValue.value}${unit.value}, ${fluidCalculation}, ${maxValue.value}${unit.value})`
 })
 
