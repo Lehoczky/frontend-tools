@@ -34,50 +34,45 @@
     </div>
 
     <div
-      class="relative mt-5 min-h-[4rem] rounded-sm bg-base-800 py-5 pl-5 pr-14 text-white"
+      class="relative mt-5 min-h-[4rem] rounded-sm bg-base-800 py-5 pl-5 pr-14"
     >
       <code class="leading-none">
         <template v-if="!hideCSS">
-          <span class="text-[#56b6c2]">clamp</span
-          ><span class="text-[#c678dd]">(</span
-          ><span class="text-[#d19a66]">{{ minValue }}</span
-          ><span class="text-[#e06c75]">{{ unit }}</span
-          ><span class="text-[#abb2bf]">, </span
-          ><span class="text-[#56b6c2]">calc(</span
-          ><span class="text-[#d19a66]">{{ z }}</span
-          ><span class="text-[#e06c75]">rem</span
-          ><span class="text-[#56b6c2]"> + </span
-          ><span class="text-[#d19a66]">(</span
-          ><span class="text-[#c678dd]">(</span
-          ><span class="text-[#d19a66]">1</span
-          ><span class="text-[#e06c75]">vw</span
-          ><span class="text-[#56b6c2]"> - </span
-          ><span class="text-[#d19a66]">{{ x }}</span
-          ><span class="text-[#e06c75]">{{ unit }}</span
-          ><span class="text-[#c678dd]">)</span
-          ><span class="text-[#56b6c2]"> * </span
-          ><span class="text-[#d19a66]">{{ y }}</span
-          ><span class="text-[#d19a66]">)</span
-          ><span class="text-[#56b6c2]">)</span
-          ><span class="text-[#abb2bf]">, </span
-          ><span class="text-[#d19a66]">{{ maxValue }}</span
-          ><span class="text-[#e06c75]">{{ unit }}</span
-          ><span class="text-[#c678dd]">)</span>
+          <span class="text-code-blue">clamp</span
+          ><span class="text-code-purple">(</span
+          ><span class="text-code-yellow">{{ minInClamp }}</span
+          ><span class="text-code-red">{{ unit }}</span
+          ><span class="text-code-natural">, </span
+          ><template v-if="showConstantPart"
+            ><span class="text-code-yellow">{{ constantInCalc }}</span
+            ><span class="text-code-red">{{ unit }}</span
+            ><span class="text-code-blue"> + </span></template
+          ><span class="text-code-yellow">{{ viewWidthInCalc }}</span
+          ><span class="text-code-red">vw</span
+          ><span class="text-code-natural">, </span
+          ><span class="text-code-yellow">{{ maxInClamp }}</span
+          ><span class="text-code-red">{{ unit }}</span
+          ><span class="text-code-purple">)</span>
         </template>
       </code>
 
       <button
-        class="absolute right-5 top-5 text-[#abb2bf] hover:text-white active:scale-90"
+        class="absolute right-5 top-5 text-code-natural hover:text-white active:scale-90"
         aria-label="Copy CSS"
         @click="copy()"
       >
         <IconCopy />
       </button>
     </div>
+
+    <div class="asd" />
   </article>
 </template>
 
 <script setup lang="ts">
+/**
+ * @see {@link https://chriskirknielsen.com/blog/modern-fluid-typography-with-clamp/}
+ */
 import { round } from "lodash-es"
 
 import { toPX, toREMWithFixedPrecision } from "~~/utils"
@@ -93,33 +88,25 @@ const viewportDifference = computed(() => maxViewport.value - minViewport.value)
 const hideCSS = computed(
   () => isNaN(valueDifference.value) || isNaN(viewportDifference.value)
 )
-
-const x = computed(() => round(minViewport.value / 100, 4))
-const y = computed(() =>
-  round((100 * valueDifference.value) / viewportDifference.value, 4)
+const minInClamp = computed(() => Math.min(minValue.value, maxValue.value))
+const maxInClamp = computed(() => Math.max(minValue.value, maxValue.value))
+const factor = computed(() => {
+  return (1 / viewportDifference.value) * valueDifference.value
+})
+const constantInCalc = computed(() =>
+  round(minValue.value - minViewport.value * factor.value, 4)
 )
-const z = computed(() =>
-  unit.value === "rem"
-    ? minValue.value
-    : toREMWithFixedPrecision(minValue.value)
-)
+const showConstantPart = computed(() => constantInCalc.value !== 0)
+const viewWidthInCalc = computed(() => round(100 * factor.value, 4))
 
-/**
- * calculation = calc(z + ((1vw - x) * y))
- *
- * Where  x = min_viewport / 100
- *        y = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
- *           = 100 * font_size_difference / viewport_difference
- *        z = Minimum font-size stated in REM
- *
- * @see {@link https://websemantics.uk/tools/responsive-font-calculator/}
- */
 const css = computed(() => {
   if (hideCSS.value) {
     return ""
   }
-  const fluidCalculation = `calc(${z.value}rem + ((1vw - ${x.value}${unit.value}) * ${y.value}))`
-  return `clamp(${minValue.value}${unit.value}, ${fluidCalculation}, ${maxValue.value}${unit.value})`
+  const calc = showConstantPart.value
+    ? `${constantInCalc.value}${unit.value} + ${viewWidthInCalc.value}vw`
+    : `${viewWidthInCalc.value}vw`
+  return `clamp(${minInClamp.value}${unit.value}, ${calc}, ${maxInClamp.value}${unit.value})`
 })
 
 const { copy } = useClipboard({ source: css })
