@@ -59,7 +59,7 @@
       <button
         class="absolute right-5 top-5 text-code-natural hover:text-white active:scale-90"
         aria-label="Copy CSS"
-        @click="copy()"
+        @click="copy"
       >
         <IconCopy />
       </button>

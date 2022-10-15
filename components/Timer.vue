@@ -12,7 +12,7 @@
         :class="{
           'text-opacity-50': editing,
         }"
-        @click="focusInput()"
+        @click="focusInput"
       >
         <div
           :class="{
@@ -151,7 +151,7 @@
         <div class="tracking-wide">Timer finished!</div>
         <button
           class="transition-color justify-self-end rounded-md px-2 py-1 ease-out hover:bg-base-400 active:scale-95"
-          @click="closeNotificationAndStopBeeping()"
+          @click="closeNotificationAndStopBeeping"
         >
           OK
         </button>
@@ -177,7 +177,7 @@ const title = ref("Frontend Tools")
 const countingDown = ref(false)
 const showNotification = ref(false)
 let beepSound: HTMLAudioElement | undefined = undefined
-const beepingInterval = useIntervalFn(() => beepSound.play(), 2500, {
+const beepingInterval = useIntervalFn(() => void beepSound.play(), 2500, {
   immediate: false,
   immediateCallback: true,
 })
@@ -196,7 +196,11 @@ const preventNonNumericInput = (event: KeyboardEvent) => {
 const numbers = computed(() => {
   const valueAsNumbers = Array.from(rawValue.value, Number)
   const numOfLeadingZeros = MAX_INPUT_LENGTH - rawValue.value.length
-  const leadingZeros = Array(numOfLeadingZeros).fill(0, 0, numOfLeadingZeros)
+  const leadingZeros = new Array(numOfLeadingZeros).fill(
+    0,
+    0,
+    numOfLeadingZeros
+  )
   return [...leadingZeros, ...valueAsNumbers]
 })
 
@@ -240,7 +244,7 @@ const secondsInReadableForm = (totalSeconds: number) => {
   const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
 
   return [hours, minutes, seconds]
-    .map((v) => (v < 10 ? "0" + v : v))
+    .map((v) => (v < 10 ? `0${v}` : v))
     .filter((v, i) => v !== "00" || i > 0)
     .join(":")
 }
@@ -248,7 +252,7 @@ const secondsInReadableForm = (totalSeconds: number) => {
 const secondsToRawValue = (totalSeconds: number) => {
   const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
   const timeAsStringWithLeadingZeros = [hours, minutes, seconds]
-    .map((v) => (v < 10 ? "0" + v : v))
+    .map((v) => (v < 10 ? `0${v}` : v))
     .join("")
 
   return dropLeadingZeros(timeAsStringWithLeadingZeros)

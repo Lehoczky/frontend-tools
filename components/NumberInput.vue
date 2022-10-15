@@ -45,7 +45,7 @@ const emit = defineEmits<{
 
 const value = computed<number>({
   get() {
-    return props.modelValue == undefined ? undefined : Number(props.modelValue)
+    return props.modelValue == null ? undefined : Number(props.modelValue)
   },
   set(inputValue: unknown) {
     const value = String(inputValue)
@@ -64,7 +64,6 @@ const value = computed<number>({
     if (isNaN(number)) {
       // Something wrong has been typed in, but we don't want to clear
       // the input, so we pretend nothing happened
-      return
     } else {
       emit("update:modelValue", number)
     }

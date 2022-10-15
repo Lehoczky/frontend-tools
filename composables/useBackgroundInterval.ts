@@ -1,4 +1,4 @@
-const createWorker = function (fn: () => void) {
+function createWorker(fn: () => void) {
   const blobURL = URL.createObjectURL(
     new Blob(["(", fn.toString(), ")()"], {
       type: "application/javascript",
@@ -11,13 +11,13 @@ const createWorker = function (fn: () => void) {
 }
 
 export default (callback: () => void) => {
-  const worker = createWorker(function () {
+  const worker = createWorker(() => {
     let interval: ReturnType<typeof setInterval> | undefined = undefined
 
     self.addEventListener("message", (event) => {
       switch (event.data) {
         case "start":
-          interval = setInterval(() => self.postMessage("tick"), 1_000)
+          interval = setInterval(() => self.postMessage("tick"), 1000)
           break
         case "pause":
           clearInterval(interval)

@@ -30,11 +30,11 @@ const rem = ref<number>()
 
 const handlePXInput = (value: number) => {
   px.value = value
-  rem.value = value !== undefined ? toREMWithFixedPrecision(value) : undefined
+  rem.value = value === undefined ? undefined : toREMWithFixedPrecision(value)
 }
 
 const handleREMInput = (value: number) => {
   rem.value = value
-  px.value = value !== undefined ? toPX(value) : undefined
+  px.value = value === undefined ? undefined : toPX(value)
 }
 </script>

@@ -1,4 +1,4 @@
-import { InjectionKey, Ref } from "vue"
+import type { InjectionKey, Ref } from "vue"
 
 export interface RadioGroupState {
   id: string
