@@ -1,6 +1,11 @@
 {
-  "extends": "./.nuxt/tsconfig.json",
-  "compilerOptions": { "allowJs": false },
-  "include": ["**/*.ts", "**/*.vue"],
-  "exclude": ["node_modules", "dist", ".output"]
+  "include": [
+    "components/**/*.vue",
+    "composables/**/*.ts",
+    "utils/**/*.ts",
+    "pages/**/*.vue",
+    "plugins/**/*.ts",
+    "app.vue",
+    "nuxt.config.ts"
+  ]
 }
