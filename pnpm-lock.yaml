@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@lehoczky/eslint-config-vue': ^0.0.4
+  '@lehoczky/eslint-config-vue': ^0.0.7
   '@types/lodash-es': ^4.17.6
   '@vueuse/core': ^9.3.0
   '@vueuse/nuxt': ^9.3.0
@@ -26,7 +26,7 @@ dependencies:
   lodash-es: 4.17.21
 
 devDependencies:
-  '@lehoczky/eslint-config-vue': 0.0.4_z4bbprzjrhnsfa24uvmcbu7f5q
+  '@lehoczky/eslint-config-vue': 0.0.7_z4bbprzjrhnsfa24uvmcbu7f5q
   '@types/lodash-es': 4.17.6
   '@vueuse/core': 9.3.0
   '@vueuse/nuxt': 9.3.0_nuxt@3.0.0-rc.11
@@ -484,8 +484,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@lehoczky/eslint-config-vue/0.0.4_z4bbprzjrhnsfa24uvmcbu7f5q:
-    resolution: {integrity: sha512-O7smCfW3ymE0tvMvj03KmmRc6S0K3l5E8glc9Y6yk0WltWC2q4iOXuDj8NuflAgEGStxxJhTr0z0MIK9uYO8cA==}
+  /@lehoczky/eslint-config-vue/0.0.7_z4bbprzjrhnsfa24uvmcbu7f5q:
+    resolution: {integrity: sha512-NzK7ApOz9w/iQqNOnGwICsqDcz4vs7HUiiper1Txmvkc2cceD/ltZIN0NK/DN2qOvRNXW2oF7UCe6cPPHjOYCA==}
     peerDependencies:
       eslint: '>=8.14.0'
       typescript: '>=4.0'

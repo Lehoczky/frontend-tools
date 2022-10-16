@@ -11,7 +11,7 @@
     "deploy": "gh-pages -d dist -t true"
   },
   "devDependencies": {
-    "@lehoczky/eslint-config-vue": "^0.0.4",
+    "@lehoczky/eslint-config-vue": "^0.0.7",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^9.3.0",
     "@vueuse/nuxt": "^9.3.0",
