@@ -7,6 +7,7 @@
       type="text"
       class="w-full rounded-md bg-base-500 px-5 py-4 text-center outline-none ring-gray-500 focus:ring"
       @keydown="handleKeydownEvent($event)"
+      @keyup.ctrl.c="copyValueWithSuffix($event)"
     />
 
     <div
@@ -69,6 +70,17 @@ const value = computed<number>({
     }
   },
 })
+
+const { copy } = useClipboard()
+async function copyValueWithSuffix(event: KeyboardEvent) {
+  const target = event.target as HTMLInputElement
+  const textHasNotBeenSelected = target.selectionStart === target.selectionEnd
+
+  if (value.value && textHasNotBeenSelected) {
+    const suffix = props.suffix ?? ""
+    await copy(value.value + suffix)
+  }
+}
 
 const handleKeydownEvent = (event: KeyboardEvent) => {
   if (event.key === "ArrowDown") {

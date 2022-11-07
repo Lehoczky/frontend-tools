@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   modules: ["@vueuse/nuxt"],
   typescript: {
     shim: false,
+    strict: false,
   },
   postcss: {
     plugins: {
