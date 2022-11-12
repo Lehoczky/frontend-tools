@@ -40,6 +40,16 @@
             >Favicon generator<IconExternal class="ml-2.5"
           /></NuxtLink>
         </li>
+
+        <li>
+          <NuxtLink
+            class="transition-color inline-flex w-full items-center py-4 px-4 ease-out hover:bg-base-400 active:scale-95 sm:rounded-md sm:py-2"
+            to="https://tailwindcss.com/"
+            target="_blank"
+            @click="open = false"
+            >TailwindCSS<IconExternal class="ml-2.5"
+          /></NuxtLink>
+        </li>
       </ul>
 
       <NuxtLink
