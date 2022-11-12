@@ -15,6 +15,12 @@ useHead({
   htmlAttrs: {
     lang: "en-US",
   },
+  link: [
+    {
+      rel: "icon",
+      href: "/frontend-tools/favicon.ico",
+    },
+  ],
   bodyAttrs: {
     class: "bg-base-700 font-poppins text-base-300",
   },
