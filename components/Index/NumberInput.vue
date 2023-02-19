@@ -5,7 +5,7 @@
       v-model="value"
       :inputmode="inputmode"
       type="text"
-      class="w-full rounded-md bg-base-500 px-5 py-4 text-center outline-none ring-gray-500 focus:ring"
+      class="w-full rounded-md bg-base-500 px-5 py-3 text-center !leading-none outline-none ring-gray-500 focus:ring"
       @keydown="handleKeydownEvent($event)"
       @keyup.ctrl.c="copyValueWithSuffix($event)"
     />

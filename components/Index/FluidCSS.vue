@@ -15,9 +15,9 @@
         class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
       >
         <div>from</div>
-        <NumberInput v-model="minValue" class="max-w-[9rem]" />
+        <IndexNumberInput v-model="minValue" class="max-w-[9rem]" />
         <div>to</div>
-        <NumberInput v-model="maxValue" class="max-w-[9rem]" />
+        <IndexNumberInput v-model="maxValue" class="max-w-[9rem]" />
         <div>{{ unit }}</div>
       </div>
 
@@ -26,9 +26,9 @@
         class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
       >
         <div>from</div>
-        <NumberInput v-model="minViewport" class="max-w-[9rem]" />
+        <IndexNumberInput v-model="minViewport" class="max-w-[9rem]" />
         <div>to</div>
-        <NumberInput v-model="maxViewport" class="max-w-[9rem]" />
+        <IndexNumberInput v-model="maxViewport" class="max-w-[9rem]" />
         <div>{{ unit }}</div>
       </div>
     </div>
@@ -59,7 +59,7 @@
       <button
         class="absolute right-5 top-5 text-code-natural hover:text-white active:scale-90"
         aria-label="Copy CSS"
-        @click="copy"
+        @click="copyCss"
       >
         <IconCopy />
       </button>
@@ -109,7 +109,10 @@ const css = computed(() => {
   return `clamp(${minInClamp.value}${unit.value}, ${calc}, ${maxInClamp.value}${unit.value})`
 })
 
-const { copy } = useClipboard({ source: css })
+const { copy } = useClipboard()
+function copyCss() {
+  return copy(css.value)
+}
 
 watch(unit, (newValue) => {
   if (newValue === "px") {

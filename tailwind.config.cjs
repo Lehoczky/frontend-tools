@@ -6,8 +6,9 @@ module.exports = {
     "./pages/**/*.vue",
     "./composables/**/*.{js,ts}",
     "./plugins/**/*.{js,ts}",
-    "./App.{js,ts,vue}",
-    "./app.{js,ts,vue}",
+    "./error.vue",
+    "./app.vue",
+    "./nuxt.config.ts",
   ],
   theme: {
     extend: {
@@ -41,6 +42,7 @@ module.exports = {
         header: "0 0 10px 0 #00000029",
       },
       transitionDuration: {
+        0: "0ms",
         250: "250ms",
       },
     },

@@ -99,45 +99,39 @@
         />
       </div>
 
-      <button
-        class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
-        :disabled="countingDown"
-        @click="rawValue = '500'"
-      >
+      <Button :disabled="countingDown" @click="rawValue = '500'">
         <IconTea class="h-5 w-5 fill-current" />
         Chamomile tea
-      </button>
+      </Button>
 
-      <button
-        class="transition-color inline-flex items-center gap-1.5 rounded-md bg-base-500 px-4 py-2 ease-out hover:bg-base-400 active:scale-95 disabled:opacity-50 disabled:hover:bg-base-500 disabled:active:scale-100"
-        :disabled="countingDown"
-        @click="rawValue = '800'"
-      >
+      <Button :disabled="countingDown" @click="rawValue = '800'">
         <IconTea class="h-5 w-5 fill-current" />
         Fruit tea
-      </button>
+      </Button>
 
       <div class="relative h-10">
         <Transition name="slide-up">
-          <button
+          <Button
             v-if="!countingDown"
-            class="absolute inline-flex items-center gap-1.5 rounded-md bg-sky-800 px-4 py-2 will-change-transform hover:bg-sky-700 active:scale-95 disabled:opacity-50 disabled:hover:bg-sky-800 disabled:active:scale-100"
+            class="absolute will-change-transform"
+            color="blue"
             :disabled="startButtonDisabled"
             @click="countingDown = true"
           >
             Start
             <IconPlay />
-          </button>
+          </Button>
 
-          <button
+          <Button
             v-else
-            class="absolute inline-flex items-center gap-1.5 rounded-md bg-rose-800 px-4 py-2 will-change-transform active:scale-95 disabled:opacity-50 disabled:active:scale-100"
+            class="absolute will-change-transform"
+            color="red"
             :disabled="!countingDown"
             @click="countingDown = false"
           >
             Pause
             <IconPause />
-          </button>
+          </Button>
         </Transition>
       </div>
     </div>
