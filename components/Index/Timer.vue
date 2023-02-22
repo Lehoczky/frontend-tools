@@ -15,6 +15,7 @@
         @click="focusInput"
       >
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length <= 5,
             'opacity-0': !editing && numbers[0] === 0 && rawValue.length <= 5,
@@ -23,6 +24,7 @@
           {{ numbers[0] }}
         </div>
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length <= 4,
             'opacity-0': !editing && numbers[1] === 0 && rawValue.length <= 4,
@@ -40,6 +42,7 @@
           h
         </div>
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length <= 3,
             'opacity-0': !editing && numbers[2] === 0 && rawValue.length <= 3,
@@ -48,6 +51,7 @@
           {{ numbers[2] }}
         </div>
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length <= 2,
             'opacity-0': !editing && numbers[3] === 0 && rawValue.length <= 2,
@@ -65,6 +69,7 @@
           m
         </div>
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length <= 1,
             'opacity-0': !editing && numbers[4] === 0 && rawValue.length <= 1,
@@ -73,6 +78,7 @@
           {{ numbers[4] }}
         </div>
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length === 0,
           }"
@@ -80,6 +86,7 @@
           {{ numbers[5] }}
         </div>
         <div
+          class="w-[1ch] text-right"
           :class="{
             'opacity-50': editing && rawValue.length === 0,
           }"
