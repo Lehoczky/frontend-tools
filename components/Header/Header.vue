@@ -18,7 +18,7 @@
 
         <li>
           <HeaderLinkButton to="/timer" @click="open = false">
-           Timer
+            Timer
           </HeaderLinkButton>
         </li>
 

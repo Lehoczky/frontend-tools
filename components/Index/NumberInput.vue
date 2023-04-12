@@ -12,7 +12,7 @@
 
     <div
       v-if="suffix"
-      class="absolute right-6 top-1/2 -translate-y-1/2 leading-none text-lg"
+      class="absolute right-6 top-1/2 -translate-y-1/2 text-lg leading-none"
     >
       {{ suffix }}
     </div>

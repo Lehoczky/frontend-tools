@@ -1,7 +1,7 @@
 <template>
- <Transition name="slide-left">
-  <slot/>
- </Transition>
+  <Transition name="slide-left">
+    <slot />
+  </Transition>
 </template>
 
 <style scoped>
@@ -14,5 +14,4 @@
 .slide-left-leave-to {
   @apply translate-x-7 opacity-0;
 }
-
 </style>
