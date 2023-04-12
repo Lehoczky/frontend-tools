@@ -6,11 +6,11 @@
     :class="{
       'bg-base-500 hover:bg-base-400 disabled:hover:bg-base-500':
         color === 'default',
-      'bg-sky-800 hover:bg-sky-700 disabled:hover:bg-base-800':
-        color === 'blue',
+      'bg-sky-800 hover:bg-sky-700 disabled:hover:bg-sky-800': color === 'blue',
       'bg-rose-800 hover:bg-rose-700 disabled:hover:bg-rose-800':
         color === 'red',
     }"
+    v-bind="additionalProps"
   >
     <slot />
   </component>
@@ -33,5 +33,9 @@ const props = defineProps({
 
 const component = computed(() => {
   return props.to ? resolveComponent("nuxt-link") : "button"
+})
+
+const additionalProps = computed(() => {
+  return props.to ? { target: "_blank" } : {}
 })
 </script>
