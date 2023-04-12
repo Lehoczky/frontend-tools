@@ -27,13 +27,16 @@ export default defineNuxtConfig({
       },
     },
   },
-  css: ["@/assets/css/main.css"],
-  modules: ["@vueuse/nuxt", "@nuxt/content", "@nuxtjs/tailwindcss"],
+  css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
+  modules: ["@vueuse/nuxt", "@nuxt/content"],
   typescript: {
     shim: false,
     strict: false,
   },
-  tailwindcss: {
-    viewer: false,
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
   },
 })

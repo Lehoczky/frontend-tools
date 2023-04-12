@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss"
+
+export default {
   content: [
     "./components/**/*.{vue,js,ts}",
     "./layouts/**/*.vue",
@@ -51,4 +52,4 @@ module.exports = {
     fontSize: false,
   },
   plugins: [require("tailwindcss-fluid-type")],
-}
+} satisfies Config

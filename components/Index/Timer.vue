@@ -146,7 +146,7 @@
     <Transition name="slide-left">
       <div
         v-if="showNotification"
-        class="notification fixed top-20 right-7 grid grid-cols-[min-content_auto] gap-x-9 gap-y-2 rounded-md py-2.5 pl-4 pr-10 text-sm"
+        class="notification fixed right-7 top-20 grid grid-cols-[min-content_auto] gap-x-9 gap-y-2 rounded-md py-2.5 pl-4 pr-10 text-sm"
       >
         <IconCheckCircle class="row-span-2 self-center text-green-500" />
         <div class="tracking-wide">Timer finished!</div>

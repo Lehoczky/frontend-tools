@@ -8,6 +8,6 @@
     "layouts/**/*.vue",
     "app.vue",
     "error.vue",
-    "nuxt.config.ts"
+    "./*.ts"
   ]
 }

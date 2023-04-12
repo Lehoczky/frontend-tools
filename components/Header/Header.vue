@@ -9,7 +9,7 @@
       </button>
 
       <ul
-        class="fixed top-16 bottom-0 -left-3/4 flex w-3/4 flex-col gap-2 bg-base-500 transition-transform duration-300 ease-out sm:relative sm:top-auto sm:bottom-auto sm:left-auto sm:right-auto sm:w-auto sm:translate-x-0 sm:flex-row"
+        class="fixed -left-3/4 bottom-0 top-16 flex w-3/4 flex-col gap-2 bg-base-500 transition-transform duration-300 ease-out sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:top-auto sm:w-auto sm:translate-x-0 sm:flex-row"
         :class="{ 'translate-x-full': open }"
       >
         <li>
