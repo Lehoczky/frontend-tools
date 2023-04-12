@@ -8,7 +8,7 @@
     "format:check": "prettier \"./**\" --check --ignore-unknown",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "gh:deploy": "gh-pages -d dist -t true"
+    "gh:deploy": "npm run generate && gh-pages -d dist -t true"
   },
   "devDependencies": {
     "@lehoczky/eslint-config-vue": "^0.0.14",
