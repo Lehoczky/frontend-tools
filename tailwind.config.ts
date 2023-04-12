@@ -48,8 +48,5 @@ export default {
       },
     },
   },
-  corePlugins: {
-    fontSize: false,
-  },
-  plugins: [require("tailwindcss-fluid-type")],
+  plugins: [require("@tailwindcss/typography")],
 } satisfies Config

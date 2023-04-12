@@ -13,6 +13,7 @@
   "devDependencies": {
     "@lehoczky/eslint-config-vue": "^0.0.14",
     "@nuxt/content": "^2.5.2",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/lodash-es": "^4.17.7",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
@@ -28,7 +29,6 @@
     "stylelint-config-standard": "^32.0.0",
     "stylelint-config-tailwindcss": "^0.0.7",
     "tailwindcss": "^3.3.1",
-    "tailwindcss-fluid-type": "^2.0.3",
     "typescript": "^5.0.4"
   },
   "dependencies": {

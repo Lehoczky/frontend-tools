@@ -4,11 +4,11 @@
       <Title>{{ title }}</Title>
     </Head>
 
-    <h2 class="mb-article-heading text-3xl">Timer</h2>
+    <h1 class="mb-article-heading text-3xl">Timer</h1>
 
     <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-end">
       <div
-        class="flex cursor-text rounded-md bg-base-500 px-5 py-4 outline-none ring-gray-600 text-xl focus-within:ring"
+        class="flex cursor-text rounded-md bg-base-500 px-5 py-4 text-xl outline-none ring-gray-600 focus-within:ring"
         :class="{
           'text-opacity-50': editing,
         }"
@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <Transition name="slide-left">
+    <TransitionSlideInLeft>
       <div
         v-if="showNotification"
         class="notification fixed right-7 top-20 grid grid-cols-[min-content_auto] gap-x-9 gap-y-2 rounded-md py-2.5 pl-4 pr-10 text-sm"
@@ -157,7 +157,7 @@
           OK
         </button>
       </div>
-    </Transition>
+    </TransitionSlideInLeft>
   </article>
 </template>
 
@@ -173,7 +173,7 @@ const MAX_INPUT_LENGTH = 6
 const input = ref<HTMLInputElement>()
 const editing = ref(false)
 const rawValue = ref("")
-const title = ref("Frontend Tools")
+const title = ref("Timer")
 
 const countingDown = ref(false)
 const showNotification = ref(false)
@@ -217,7 +217,7 @@ const decrementTime = () => {
   if (parsedSeconds.value > 1) {
     const seconds = parsedSeconds.value - 1
     rawValue.value = secondsToRawValue(seconds)
-    title.value = `${secondsInReadableForm(seconds)} - Frontend Tools`
+    title.value = `${secondsInReadableForm(seconds)}`
   } else {
     countingDown.value = false
     rawValue.value = ""
@@ -233,10 +233,10 @@ watch(countingDown, (newValue) => {
       beepSound = loadBeepSound()
     }
     const time = secondsInReadableForm(parsedSeconds.value)
-    title.value = `${time} - Frontend Tools`
+    title.value = `${time}`
     startInterval()
   } else {
-    title.value = "Frontend Tools"
+    title.value = "Timer"
     pauseInterval()
   }
 })
@@ -286,16 +286,6 @@ const closeNotificationAndStopBeeping = () => {
 
 .slide-up-leave-to {
   @apply -translate-y-7 opacity-0;
-}
-
-.slide-left-enter-active,
-.slide-left-leave-active {
-  @apply transition;
-}
-
-.slide-left-enter-from,
-.slide-left-leave-to {
-  @apply translate-x-7 opacity-0;
 }
 
 .notification {

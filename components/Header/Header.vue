@@ -17,19 +17,25 @@
         </li>
 
         <li>
-          <HeaderLinkButton to="external-resources" @click="open = false">
-            External Resources
+          <HeaderLinkButton to="/timer" @click="open = false">
+           Timer
           </HeaderLinkButton>
         </li>
 
         <li>
-          <HeaderLinkButton to="style-guides" @click="open = false">
+          <HeaderLinkButton to="/fluid-css" @click="open = false">
+            Fluid CSS
+          </HeaderLinkButton>
+        </li>
+
+        <li>
+          <HeaderLinkButton to="/style-guides" @click="open = false">
             Style Guides
           </HeaderLinkButton>
         </li>
 
         <li>
-          <HeaderLinkButton to="learning" @click="open = false">
+          <HeaderLinkButton to="/learning" @click="open = false">
             Learning
           </HeaderLinkButton>
         </li>

@@ -1,6 +1,11 @@
 <template>
   <IndexPxToRemConverter />
-  <IndexFluidCSS />
+  <IndexExternalStuff />
   <IndexLunchTime />
-  <IndexTimer />
 </template>
+
+<script setup>
+useHead({
+  title: "Frontend Tools",
+})
+</script>

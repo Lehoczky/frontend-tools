@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       link: [
         {
           rel: "icon",
-          href: "/favicon.ico",
+          href: "/frontend-tools/favicon.ico",
         },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
