@@ -10,7 +10,7 @@ export const RadioGroupContext = Symbol(
   "RadioGroupContext"
 ) as InjectionKey<RadioGroupState>
 
-export function useRadioGroupContext(component: string) {
+export default function useRadioGroupContext(component: string) {
   const context = inject(RadioGroupContext, null)
 
   if (context === null) {

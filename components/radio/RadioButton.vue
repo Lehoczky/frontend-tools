@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRadioGroupContext } from "./context"
+import useRadioGroupContext from "./context"
 
 const props = defineProps<{ value: any }>()
 const context = useRadioGroupContext("RadioGroupOption")
