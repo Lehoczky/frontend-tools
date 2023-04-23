@@ -27,11 +27,17 @@ export default defineNuxtConfig({
       },
     },
   },
+  extends: ["@nuxt-themes/elements", "@nuxt-themes/typography"],
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
   modules: ["@vueuse/nuxt", "@nuxt/content"],
   typescript: {
     shim: false,
     strict: false,
+  },
+  content: {
+    highlight: {
+      theme: "dark-plus",
+    },
   },
   postcss: {
     plugins: {
