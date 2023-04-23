@@ -11,16 +11,6 @@ export default defineNuxtConfig({
           rel: "icon",
           href: "/frontend-tools/favicon.ico",
         },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossorigin: "anonymous",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap",
-        },
       ],
       bodyAttrs: {
         class: "bg-base-700 font-poppins text-base-300",
@@ -29,7 +19,7 @@ export default defineNuxtConfig({
   },
   extends: ["@nuxt-themes/elements", "@nuxt-themes/typography"],
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
-  modules: ["@vueuse/nuxt", "@nuxt/content"],
+  modules: ["@vueuse/nuxt", "@nuxt/content", "@nuxtjs/google-fonts"],
   typescript: {
     shim: false,
     strict: false,
@@ -43,6 +33,13 @@ export default defineNuxtConfig({
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
+    },
+  },
+  googleFonts: {
+    families: {
+      Poppins: {
+        wght: [400, 500, 600],
+      },
     },
   },
 })

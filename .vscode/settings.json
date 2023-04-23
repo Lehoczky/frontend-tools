@@ -12,5 +12,5 @@
   "less.validate": false,
   "scss.validate": false,
   "stylelint.validate": ["vue", "css"],
-  "cSpell.words": ["Nuxt", "vueuse"]
+  "cSpell.words": ["Nuxt", "vueuse", "wght"]
 }
