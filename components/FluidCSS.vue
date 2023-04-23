@@ -70,7 +70,7 @@
       <NuxtLink
         to="https://github.com/Lehoczky/postcss-fluid"
         target="_blank"
-        class="relative inline-block overflow-hidden align-bottom text-sky-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:-translate-x-[150%] after:bg-current after:opacity-40 after:transition after:duration-500 after:ease-out after:will-change-transform hover:after:translate-x-0 hover:after:opacity-100"
+        class="relative inline-block overflow-hidden align-bottom text-sky-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:-translate-x-[150%] after:bg-current after:opacity-40 after:transition after:duration-700 after:ease-out after:will-change-transform hover:after:translate-x-0 hover:after:opacity-100"
         >@lehoczky/postcss-fluid</NuxtLink
       >
     </div>
