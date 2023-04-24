@@ -17,6 +17,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  // TODO: fully custom elements and typography based on tailwindcss
   extends: ["@nuxt-themes/elements", "@nuxt-themes/typography"],
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
   modules: ["@vueuse/nuxt", "@nuxt/content", "@nuxtjs/google-fonts"],
@@ -36,6 +37,8 @@ export default defineNuxtConfig({
     },
   },
   googleFonts: {
+    preload: true,
+    download: false,
     families: {
       Poppins: {
         wght: [400, 500, 600],

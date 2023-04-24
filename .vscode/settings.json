@@ -5,7 +5,8 @@
   },
   "eslint.validate": ["javascript", "typescript", "yaml", "vue"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.markdownlint": true
   },
   "volar.inlayHints.eventArgumentInInlineHandlers": false,
   "css.validate": false,

@@ -29,14 +29,8 @@
         </li>
 
         <li>
-          <HeaderLinkButton to="/style-guides" @click="open = false">
-            Style Guides
-          </HeaderLinkButton>
-        </li>
-
-        <li>
-          <HeaderLinkButton to="/learning" @click="open = false">
-            Learning
+          <HeaderLinkButton to="/style-guide" @click="open = false">
+            Style Guide
           </HeaderLinkButton>
         </li>
       </ul>
