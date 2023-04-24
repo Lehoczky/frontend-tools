@@ -42,7 +42,9 @@
       </Button>
       <Button to="https://caniuse.com/">Can I use</Button>
       <Button to="https://squoosh.app/">Squoosh - Image optimization</Button>
-      <Button to="https://www.responsivebreakpoints.com/">Responsive Image Breakpoints Generator</Button>
+      <Button to="https://www.responsivebreakpoints.com/">
+        Responsive Image Breakpoints Generator
+      </Button>
     </div>
   </article>
 </template>
