@@ -20,7 +20,7 @@
         TailwindCSS
       </Button>
       <Button
-        to="https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js"
+        to="https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js"
       >
         <IconTailwind class="h-[1em] w-[1em] grayscale" />
         TailwindCSS Default Theme
