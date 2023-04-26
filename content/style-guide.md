@@ -131,14 +131,14 @@ If your class/object name tells you something, don't repeat that in your variabl
 
 ```ts
 // Bad
-const Car = {
+const car = {
   carMake: "Honda",
   carModel: "Accord",
   carColor: "Blue",
 }
 
 // Good
-const Car = {
+const car = {
   make: "Honda",
   model: "Accord",
   color: "Blue",
