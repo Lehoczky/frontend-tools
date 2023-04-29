@@ -2,9 +2,44 @@
 
 <!-- https://github.com/ryanmcdermott/clean-code-javascript -->
 <!-- https://github.com/airbnb/javascript -->
-<!-- https://google.github.io/styleguide/jsguide.html -->
+<!-- https://google.github.io/styleguide/tsguide.html -->
+<!-- https://github.com/rwaldron/idiomatic.js -->
+
+All code in any code-base should look like a single person typed it, no matter how many people contributed.
+
+> "Arguments over style are pointless. There should be a style guide, and you should follow it"
+>
+> Rebecca Murphey
 
 ## Variables
+
+### Don't use `var`
+
+`const` and `let` are block scoped, like variables in most other languages. `var` in JavaScript is function scoped, which can cause difficult to understand bugs. Don't use it.
+
+```ts
+// Bad
+var value = 42
+
+// Good
+const foo = 42
+let bar = 42
+```
+
+**Enforced with:** [eslint - no-var](https://eslint.org/docs/latest/rules/no-var)
+
+### Prefer `const` over `let`
+
+If a variable is never reassigned, using the `const` declaration is better.
+
+`const` declaration tells readers, “this variable is never reassigned,” reducing cognitive load and improving maintainability.
+
+```ts
+const foo = otherValue // Use if "foo" never changes.
+let bar = someValue // Use if "bar" is ever assigned into later on.
+```
+
+**Enforced with:** [eslint - prefer-const](https://eslint.org/docs/latest/rules/prefer-const)
 
 ### Use meaningful and pronounceable variable names
 
@@ -147,6 +182,20 @@ const car = {
 
 ## Numbers
 
+### Use numeric separators
+
+Long numbers can become really hard to read, so cutting it into groups of digits, separated with a `_`, is important to keep your code clear. See more at: [MDN - Numeric separators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#numeric_separators)
+
+```ts
+// Bad
+const foo = 1234444
+
+// Good
+const foo = 1_234_444
+```
+
+**Enforced with:** [eslint-unicorn - numeric-separators-style](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/numeric-separators-style.md)
+
 ## Strings
 
 ## Arrays
@@ -179,6 +228,32 @@ function createTemporaryFile(name: string) {
 }
 ```
 
+### Function Declarations
+
+Prefer `function foo() { ... }` to declare top-level named functions.
+
+Top-level arrow functions _may_ be used, for example to provide an explicit type annotation.
+
+```ts
+// Bad
+const foo = () => {
+  // ...
+}
+
+// Good
+function foo() {
+  // ...
+}
+
+interface SearchFunction {
+  (source: string, subString: string): boolean
+}
+
+const fooSearch: SearchFunction = (source, subString) => {
+  // ...
+}
+```
+
 ### Only use arrow shorthand callback when the code fits into one line
 
 ```ts
@@ -208,6 +283,128 @@ const reallyLongVariableName = computed(() => Math.pow(10, 10))
 
 ## Classes
 
+### Avoid useless constructors
+
+It is unnecessary to provide an empty constructor or one that simply delegates into its parent class because ES2015 provides a default class constructor if one is not specified. However constructors with parameter properties, visibility modifiers or parameter decorators should not be omitted even if the body of the constructor is empty.
+
+```ts
+// Bad
+class UnnecessaryConstructor {
+  constructor() {}
+}
+
+class UnnecessaryConstructorOverride extends Base {
+  constructor(value: number) {
+    super(value)
+  }
+}
+
+// Good
+class DefaultConstructor {}
+
+class ParameterProperties {
+  constructor(private myService) {}
+}
+
+class ParameterDecorators {
+  constructor(@SideEffectDecorator myService) {}
+}
+
+class NoInstantiation {
+  private constructor() {}
+}
+```
+
+**Enforced with:** [typescript-eslint](https://typescript-eslint.io/rules/no-useless-constructor)
+
+### Don't use `#private` fields
+
+Do not use private fields (also known as private identifiers), instead, use TypeScript's visibility annotations:
+
+```ts
+// Bad
+class Clazz {
+  #ident = 1
+}
+
+// Good
+class Clazz {
+  private ident = 1
+}
+```
+
+**Why?**
+
+Private identifiers cause substantial emit size and performance regressions when down-leveled by TypeScript, and are unsupported before ES2015. They can only be downleveled to ES2015, not lower. At the same time, they do not offer substantial benefits when static type checking is used to enforce visibility.
+
+### Prefer parameter properties
+
+Rather than plumbing an obvious initializer through to a class member, use a TypeScript [parameter property](https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties).
+
+```ts
+// Bad
+class Foo {
+  private readonly barService: BarService
+
+  constructor(barService: BarService) {
+    this.barService = barService
+  }
+}
+
+// Good
+class Foo {
+  constructor(private readonly barService: BarService) {}
+}
+```
+
+### Field initializers
+
+If a class member is not a parameter, initialize it where it's declared, which sometimes lets you drop the constructor entirely.
+
+```ts
+// Bad
+class Foo {
+  private readonly userList: string[]
+
+  constructor() {
+    this.userList = []
+  }
+}
+
+// Good
+class Foo {
+  private readonly userList: string[] = []
+}
+```
+
+### Class methods must use `this`
+
+Class methods should use `this` or be made into a static method unless an external library or framework requires using specific non-static methods. Being an instance method should indicate that it behaves differently based on properties of the receiver
+
+```ts
+// Bad
+class Foo {
+  bar() {
+    console.log("bar")
+  }
+}
+
+// Good
+class Foo {
+  bar() {
+    console.log(this.bar)
+  }
+}
+
+class Foo {
+  static bar() {
+    console.log("bar")
+  }
+}
+```
+
+\*_Enforced with:_ [eslint - class-methods-use-this](https://eslint.org/docs/latest/rules/class-methods-use-this)
+
 ## Control structures
 
 ### Encapsulate conditionals
@@ -234,6 +431,18 @@ if (shouldShowSpinner(fsmInstance, listNodeInstance)) {
 }
 ```
 
+### Don't use short circuiting operators in place of control statements
+
+```ts
+// bad
+!isRunning && startRunning()
+
+// good
+if (!isRunning) {
+  startRunning()
+}
+```
+
 ### Prefer `for-of` loops
 
 Many developers default to writing for `(let i = 0; i < ...` loops to iterate over arrays. However, in many of those arrays, the loop iterator variable (e.g. `i`) is only used to access the respective element of the array. In those cases, a `for-of` loop is easier to read and write.
@@ -251,6 +460,139 @@ for (const element of array) {
 ```
 
 Enforced by: [typescript-eslint - prefer-for-of](https://typescript-eslint.io/rules/prefer-for-of)
+
+## Exceptions
+
+### Instantiate Errors using new
+
+Always use `new Error()` when instantiating exceptions, instead of just calling `Error()`. Both forms create a new `Error` instance, but using new is more consistent with how other objects are instantiated.
+
+```ts
+// Bad
+throw Error("Foo is not a valid bar.")
+
+// Good
+throw new Error("Foo is not a valid bar.")
+```
+
+**Enforced with:** [eslint-plugin-unicorn - throw-new-error](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v46.0.0/docs/rules/throw-new-error.md)
+
+### Only throw Errors
+
+JavaScript (and thus TypeScript) allow throwing arbitrary values. However if the thrown value is not an `Error`, it does not get a stack trace filled in, making debugging hard.
+
+```ts
+// Bad
+throw "oh noes!"
+
+// Good
+throw new Error("oh noes!")
+```
+
+### Pass message to built-in `Error`
+
+A message should be passed when creating an instance of a built-in `Error` object, which leads to more readable and debuggable code.
+
+```ts
+// Bad
+throw Error()
+throw Error("")
+
+// Good
+throw Error("Unexpected property.")
+```
+
+**Enforced with:** [eslint-plugin-unicorn - error-message](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md)
+
+### Use "error" as parameter name in `catch` clauses
+
+Error parameters [shouldn't be abbreviated](./style-guide#dont-abbreviate), and they are more searchable if they always have the same name.
+
+```ts
+// Bad
+try {
+  doSomething()
+} catch (e: unknown) {
+  // ...
+}
+
+try {
+  doSomething()
+} catch (err: unknown) {
+  // ...
+}
+
+try {
+  doSomething()
+} catch (exception: unknown) {
+  // ...
+}
+
+// Good
+try {
+  doSomething()
+} catch (error: unknown) {
+  // ...
+}
+```
+
+**Exception:** Descriptive names, for example, `fsError` or `authenticationError`.
+
+```ts
+try {
+  login()
+} catch (authenticationError: unknown) {
+  // ...
+}
+```
+
+**Enforced with:** [eslint-plugin-unicorn - catch-error-name](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/catch-error-name.md)
+
+### Assert thrown errors are instances of `Error`
+
+When catching errors, code _should_ assume that all thrown errors are instances of `Error`. Type checks can still be made for `Error` subclasses like `if(error instanceof AxiosError...`.
+
+```ts
+// Bad
+try {
+  doSomething()
+} catch (error: unknown) {
+  if (error instanceof Error) {
+    displayError(error.message)
+  }
+}
+
+// Good
+try {
+  doSomething()
+} catch (error: unknown) {
+  assertIsError(error)
+  displayError(error.message)
+}
+
+function assertIsError(error: unknown): asserts error is Error {
+  if (!(error instanceof Error)) {
+    throw error
+  }
+}
+```
+
+Exception handlers must not defensively handle non-`Error` types unless the called API is conclusively known to throw non-`Errors` in violation of the above rule. In that case, a comment should be included to specifically identify where the non-`Errors` originate.
+
+```ts
+try {
+  badApiThrowingStrings()
+} catch (error: unknown) {
+  // Note: bad API throws strings instead of errors.
+  if (typeof error === "string") {
+    //  ...
+  }
+}
+```
+
+**Why?**
+
+Avoid [overly defensive programming](https://en.wikipedia.org/wiki/Defensive_programming#Offensive_programming). Repeating the same defenses against a problem that will not exist in most code leads to boiler-plate code that is not useful.
 
 ## Comments
 
@@ -364,7 +706,111 @@ const actions = function () {
 }
 ```
 
-## TypeScript only
+## JSDoc
+
+### Place documentation prior to decorators
+
+```ts
+// Bad
+@Component({
+  selector: "foo",
+  template: "bar",
+})
+/** Component that prints "bar". */
+export class FooComponent {}
+
+// Good
+/** Component that prints "bar". */
+@Component({
+  selector: "foo",
+  template: "bar",
+})
+export class FooComponent {}
+```
+
+## Type assertions
+
+### Use `as` for type assertions
+
+TypeScript provides two syntaxes for "type assertions":
+
+- angle brackets: `<Type>value`
+- as: `value as Type`
+
+Use the latter as it's more readable, and does not conflict with `tsx` syntax.
+
+```ts
+// Bad
+const y = <Foo>z
+
+// Good
+const x = z as Foo
+```
+
+### Prefer type annotations for object literals
+
+Prefer type annotations (`: Foo`) instead of type assertions (`as Foo`) to specify the type of an object literal. This allows detecting refactoring bugs when the fields of an interface change over time.
+
+```ts
+// Bad
+interface Foo {
+  bar: number
+  baz?: string // was "bam", but later renamed to "baz".
+}
+
+const foo = {
+  bar: 123,
+  bam: "abc", // no error!
+} as Foo
+
+function func() {
+  return {
+    bar: 123,
+    bam: "abc", // no error!
+  } as Foo
+}
+
+// Good
+interface Foo {
+  bar: number
+  baz?: string
+}
+
+const foo: Foo = {
+  bar: 123,
+  bam: "abc", // complains about "bam" not being defined on Foo.
+}
+
+function func(): Foo {
+  return {
+    bar: 123,
+    bam: "abc", // complains about "bam" not being defined on Foo.
+  }
+}
+```
+
+## Modules
+
+### Only use named exports
+
+Do not use default exports. This ensures that all imports follow a uniform pattern.
+
+```ts
+// Bad
+export default class Foo { ... }
+
+// Good
+export class Foo { ... }
+```
+
+**Why?**
+
+Default exports provide no canonical name, which makes central maintenance difficult with relatively little benefit to code owners, including potentially decreased readability:
+
+```ts
+import Foo from "./bar" // Legal.
+import Bar from "./bar" // Also legal.
+```
 
 ## Vue
 
