@@ -13,5 +13,6 @@
   "less.validate": false,
   "scss.validate": false,
   "stylelint.validate": ["vue", "css"],
-  "cSpell.words": ["instanceof", "Nuxt", "typeof", "vueuse", "wght"]
+  "cSpell.words": ["instanceof", "Nuxt", "typeof", "vueuse", "wght"],
+  "vue.codeActions.enabled": false
 }

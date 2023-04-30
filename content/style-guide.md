@@ -198,9 +198,177 @@ const foo = 1_234_444
 
 ## Strings
 
+### Strings that cause the line to go over 80 characters should not be written across multiple lines using string concatenation
+
+Broken strings are painful to work with and make code less searchable.
+
+```ts
+// bad
+const errorMessage =
+  "This is a super long error that was thrown because \
+of Batman. When you stop to think about how Batman had anything to do \
+with this, you would get nowhere \
+fast."
+
+// bad
+const errorMessage =
+  "This is a super long error that was thrown because " +
+  "of Batman. When you stop to think about how Batman had anything to do " +
+  "with this, you would get nowhere fast."
+
+// good
+const errorMessage =
+  "This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast."
+```
+
+### When programmatically building up strings, use template strings instead of concatenation
+
+```ts
+// bad
+function sayHi(name: string) {
+  return "How are you, " + name + "?"
+}
+
+// bad
+function sayHi(name: string) {
+  return ["How are you, ", name, "?"].join()
+}
+ 
+// good
+function sayHi(name: string) {
+  return `How are you, ${name}?`
+}
+```
+
+**Why?**
+
+Template strings give you a readable, concise syntax with proper newlines and string interpolation features.
+
+**Enforced with:** [prefer-template](https://eslint.org/docs/latest/rules/prefer-template)
+
 ## Arrays
 
 ## Objects
+
+### Use object method shorthand
+
+```ts
+// bad
+const atom = {
+  value: 1,
+
+  addValue: function (value) {
+    return atom.value + value
+  },
+}
+
+// good
+const atom = {
+  value: 1,
+
+  addValue(value) {
+    return atom.value + value
+  },
+}
+```
+
+**Enforced with:** [object-shorthand](https://eslint.org/docs/latest/rules/object-shorthand)
+
+### Use property value shorthand
+
+```ts
+const lukeSkywalker = "Luke Skywalker"
+
+// bad
+const obj = {
+  lukeSkywalker: lukeSkywalker,
+}
+
+// good
+const obj = {
+  lukeSkywalker,
+}
+```
+
+**Enforced with:** [object-shorthand](https://eslint.org/docs/latest/rules/object-shorthand)
+
+### Only quote properties that are invalid identifiers
+
+In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
+
+```ts
+// bad
+const bad = {
+  foo: 3,
+  bar: 4,
+  "data-blah": 5,
+}
+
+// good
+const good = {
+  foo: 3,
+  bar: 4,
+  "data-blah": 5,
+}
+```
+
+### Use object destructuring when accessing and using multiple properties of an object
+
+Destructuring saves you from creating temporary references for those properties, and from repetitive access of the object. Repeating object access creates more repetitive code, requires more reading, and creates more opportunities for mistakes. Destructuring objects also provides a single site of definition of the object structure that is used in the block, rather than requiring reading the entire block to determine what is used.
+
+```ts
+interface User {
+  firstName: string
+  lastName: string
+}
+
+// bad
+function getFullName(user: User) {
+  const firstName = user.firstName
+  const lastName = user.lastName
+
+  return `${firstName} ${lastName}`
+}
+
+// good
+function getFullName(user: User) {
+  const { firstName, lastName } = user
+  return `${firstName} ${lastName}`
+}
+
+// best
+function getFullName({ firstName, lastName }: User) {
+  return `${firstName} ${lastName}`
+}
+```
+
+**Enforced with:**: [prefer-destructuring](https://eslint.org/docs/latest/rules/prefer-destructuring)
+
+### Use object destructuring for multiple return values, not array destructuring
+
+```ts
+// bad
+function processInput(input) {
+  // then a miracle occurs
+  return [left, right, top, bottom]
+}
+
+// the caller needs to think about the order of return data
+const [left, __, top] = processInput(input)
+
+// good
+function processInput(input) {
+  // then a miracle occurs
+  return { left, right, top, bottom }
+}
+
+// the caller selects only the data they need
+const { left, top } = processInput(input)
+```
+
+**Why?**
+
+You can add new properties over time or change the order of things without breaking call sites.
 
 ## Functions
 
