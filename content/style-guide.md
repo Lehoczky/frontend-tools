@@ -1006,7 +1006,7 @@ Why?
 - consistency across every source file
 - code will always feel familiar, regardless who wrote it
 
-::callout
+::info
 
 #summary
 Why not use linters for formatting?
@@ -1040,7 +1040,7 @@ Why?
 
 Enforced by: [Prettier - Semi](https://prettier.io/docs/en/options.html#semicolons)
 
-::callout
+::info
 
 #summary
 Why are they turned on for prettier by default?
