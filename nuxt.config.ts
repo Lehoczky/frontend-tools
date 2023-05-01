@@ -17,8 +17,6 @@ export default defineNuxtConfig({
       },
     },
   },
-  // TODO: fully custom elements and typography based on tailwindcss
-  extends: ["@nuxt-themes/elements", "@nuxt-themes/typography"],
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
   modules: ["@vueuse/nuxt", "@nuxt/content", "@nuxtjs/google-fonts"],
   typescript: {

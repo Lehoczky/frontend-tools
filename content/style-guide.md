@@ -233,7 +233,7 @@ function sayHi(name: string) {
 function sayHi(name: string) {
   return ["How are you, ", name, "?"].join()
 }
- 
+
 // good
 function sayHi(name: string) {
   return `How are you, ${name}?`
@@ -291,26 +291,6 @@ const obj = {
 ```
 
 **Enforced with:** [object-shorthand](https://eslint.org/docs/latest/rules/object-shorthand)
-
-### Only quote properties that are invalid identifiers
-
-In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
-
-```ts
-// bad
-const bad = {
-  foo: 3,
-  bar: 4,
-  "data-blah": 5,
-}
-
-// good
-const good = {
-  foo: 3,
-  bar: 4,
-  "data-blah": 5,
-}
-```
 
 ### Use object destructuring when accessing and using multiple properties of an object
 
@@ -547,7 +527,9 @@ class Foo {
 
 ### Class methods must use `this`
 
-Class methods should use `this` or be made into a static method unless an external library or framework requires using specific non-static methods. Being an instance method should indicate that it behaves differently based on properties of the receiver
+Class methods should use `this` or be made into a static method unless an external library or framework requires using specific non-static methods. Being an instance method should indicate that it behaves differently based on properties of the receiver.
+
+Another alternative is to pull the function out of the class declaration
 
 ```ts
 // Bad
@@ -571,7 +553,37 @@ class Foo {
 }
 ```
 
-\*_Enforced with:_ [eslint - class-methods-use-this](https://eslint.org/docs/latest/rules/class-methods-use-this)
+**Enforced with:** [eslint - class-methods-use-this](https://eslint.org/docs/latest/rules/class-methods-use-this)
+
+### Container Classes
+
+Do not create container classes with static methods or properties for the sake of namespacing.
+
+```ts
+// Bad
+export class Container {
+  static FOO = 1
+  static bar() {
+    return 1
+  }
+}
+
+// Good
+export const FOO = 1
+export function bar() {
+  return 1
+}
+```
+
+**Why?**
+
+- Wrapper classes add extra cognitive complexity to code without adding any structural improvements
+  - Whatever would be put on them, such as utility functions, are already organized by virtue of being in a module.
+  - As an alternative, you can `import * as ...` the module to get all of them in a single object.
+- IDEs can't provide as good suggestions for static class or namespace imported properties when you start typing property names
+- It's more difficult to statically analyze code for unused variables, etc. when they're all on the class ([see: Finding dead code (and dead types) in TypeScript](https://effectivetypescript.com/2020/10/20/tsprune/)).
+
+**Enforced with:**: [no-extraneous-class](https://typescript-eslint.io/rules/no-extraneous-class)
 
 ## Control structures
 

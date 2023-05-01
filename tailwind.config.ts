@@ -46,6 +46,9 @@ export default {
         0: "0ms",
         250: "250ms",
       },
+      listStyleType: {
+        circle: "circle",
+      },
     },
   },
 } satisfies Config

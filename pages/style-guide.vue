@@ -1,6 +1,6 @@
 <template>
   <ContentDoc v-slot="{ doc }">
-    <div class="grid grid-cols-[auto_256px] gap-x-10">
+    <div class="grid grid-cols-[auto_256px] gap-x-10 font-sans">
       <ContentRenderer class="overflow-x-hidden" :value="doc" />
 
       <TableOfContents

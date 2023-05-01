@@ -1,7 +1,7 @@
 <template>
   <aside>
-    <nav>
-      <div class="mb-2 text-lg">Table of contents</div>
+    <nav aria-labelledby="aside-toc">
+      <div id="aside-toc" class="mb-2 text-lg">Table of contents</div>
 
       <ul v-if="value.links" class="space-y-0.5">
         <li v-for="link in value.links" :key="link.text">

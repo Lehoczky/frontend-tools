@@ -1,0 +1,22 @@
+<template>
+  <h1
+    :id="id"
+    class="group mb-8 scroll-mt-24 text-5xl font-semibold tracking-tight"
+  >
+    <NuxtLink :to="`#${id}`">
+      <slot />
+      <IconAnchor
+        class="ml-3 inline-block text-3xl opacity-0 transition-opacity group-hover:opacity-100"
+      />
+    </NuxtLink>
+  </h1>
+</template>
+
+<script setup>
+defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+})
+</script>
