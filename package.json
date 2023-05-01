@@ -7,8 +7,8 @@
     "styles:check": "stylelint \"./**/*.{css,vue}\" --ignore-path=.gitignore",
     "format:check": "prettier \"./**\" --check --ignore-unknown",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "gh:deploy": "npm run generate && gh-pages -d dist -t true"
+    "gh:deploy": "npm run generate && gh-pages -d dist -t true",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
     "@lehoczky/eslint-config-vue": "^0.0.14",
@@ -21,7 +21,7 @@
     "eslint": "^8.39.0",
     "eslint-define-config": "^1.20.0",
     "gh-pages": "^5.0.0",
-    "nuxt": "^3.4.2",
+    "nuxt": "^3.4.3",
     "postcss-html": "^1.5.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
