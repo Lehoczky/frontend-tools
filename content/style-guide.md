@@ -996,7 +996,9 @@ import Bar from "./bar" // Also legal.
 
 ## Formatting
 
-### Use [Prettier](https://prettier.io/)
+### Use Prettier
+
+Every file should be formatted with [Prettier](https://prettier.io/).
 
 Why?
 

@@ -46,6 +46,9 @@
         Responsive Image Breakpoints Generator
       </Button>
       <Button to="https://scrollbar.app/">Scrollbar editor</Button>
+      <Button to="https://www.cssportal.com/css-triangle-generator/">
+        Triangle Generator
+      </Button>
     </div>
   </article>
 </template>

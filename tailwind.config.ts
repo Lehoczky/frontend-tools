@@ -49,6 +49,9 @@ export default {
       listStyleType: {
         circle: "circle",
       },
+      borderWidth: {
+        6: "6px",
+      },
     },
   },
 } satisfies Config
