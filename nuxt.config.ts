@@ -13,7 +13,7 @@ export default defineNuxtConfig({
         },
       ],
       bodyAttrs: {
-        class: "bg-base-700 font-poppins text-base-300",
+        class: "bg-base-700 font-poppins text-base-200",
       },
     },
   },
