@@ -12,7 +12,7 @@ defineProps({
   },
   target: {
     type: String,
-    default: undefined,
+    default: "_blank",
     required: false,
   },
 })
