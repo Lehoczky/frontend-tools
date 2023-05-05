@@ -2,7 +2,7 @@
   <div>
     <h1 class="mb-article-heading text-3xl">Timer</h1>
 
-    <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-end">
+    <div class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end">
       <div
         class="flex cursor-text rounded-md bg-base-500 px-5 py-4 text-xl outline-none ring-gray-600 focus-within:ring"
         :class="{
@@ -10,85 +10,56 @@
         }"
         @click="focusInput"
       >
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 5,
-            'opacity-0': !editing && numbers[0] === 0 && rawValue.length <= 5,
-          }"
+        <TimerDigit
+          :fade="editing && rawValue.length <= 5"
+          :hide="!editing && numbers[0] === 0 && rawValue.length <= 5"
         >
           {{ numbers[0] }}
-        </div>
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 4,
-            'opacity-0': !editing && numbers[1] === 0 && rawValue.length <= 4,
-          }"
+        </TimerDigit>
+        <TimerDigit
+          :fade="editing && rawValue.length <= 4"
+          :hide="!editing && numbers[1] === 0 && rawValue.length <= 4"
         >
           {{ numbers[1] }}
-        </div>
-        <div
+        </TimerDigit>
+        <TimerCharacter
           class="mr-2"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 4,
-            'opacity-0': !editing && numbers[1] === 0 && rawValue.length <= 4,
-          }"
+          :fade="editing && rawValue.length <= 4"
+          :hide="!editing && numbers[1] === 0 && rawValue.length <= 4"
         >
           h
-        </div>
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 3,
-            'opacity-0': !editing && numbers[2] === 0 && rawValue.length <= 3,
-          }"
+        </TimerCharacter>
+        <TimerDigit
+          :fade="editing && rawValue.length <= 3"
+          :hide="!editing && numbers[2] === 0 && rawValue.length <= 3"
         >
           {{ numbers[2] }}
-        </div>
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 2,
-            'opacity-0': !editing && numbers[3] === 0 && rawValue.length <= 2,
-          }"
+        </TimerDigit>
+        <TimerDigit
+          :fade="editing && rawValue.length <= 2"
+          :hide="!editing && numbers[3] === 0 && rawValue.length <= 2"
         >
           {{ numbers[3] }}
-        </div>
-        <div
+        </TimerDigit>
+        <TimerCharacter
           class="mr-2"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 2,
-            'opacity-0': !editing && numbers[3] === 0 && rawValue.length <= 2,
-          }"
+          :fade="editing && rawValue.length <= 2"
+          :hide="!editing && numbers[3] === 0 && rawValue.length <= 2"
         >
           m
-        </div>
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length <= 1,
-            'opacity-0': !editing && numbers[4] === 0 && rawValue.length <= 1,
-          }"
+        </TimerCharacter>
+        <TimerDigit
+          :fade="editing && rawValue.length <= 1"
+          :hide="!editing && numbers[4] === 0 && rawValue.length <= 1"
         >
           {{ numbers[4] }}
-        </div>
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length === 0,
-          }"
-        >
+        </TimerDigit>
+        <TimerDigit :fade="editing && rawValue.length === 0">
           {{ numbers[5] }}
-        </div>
-        <div
-          class="w-[1ch] text-right"
-          :class="{
-            'opacity-50': editing && rawValue.length === 0,
-          }"
-        >
+        </TimerDigit>
+        <TimerCharacter :fade="editing && rawValue.length === 0">
           s
-        </div>
+        </TimerCharacter>
 
         <input
           ref="input"
@@ -102,6 +73,13 @@
         />
       </div>
 
+      <TimerControlButtons
+        v-model:counting-down="countingDown"
+        :start-disabled="startButtonDisabled"
+      />
+    </div>
+
+    <div class="flex flex-wrap gap-4">
       <Button :disabled="countingDown" @click="rawValue = '500'">
         <IconTea class="h-5 w-5 fill-current" />
         Chamomile tea
@@ -112,47 +90,22 @@
         Fruit tea
       </Button>
 
-      <div class="relative h-10">
-        <Transition name="slide-up">
-          <Button
-            v-if="!countingDown"
-            class="absolute will-change-transform"
-            color="blue"
-            :disabled="startButtonDisabled"
-            @click="countingDown = true"
-          >
-            Start
-            <IconPlay />
-          </Button>
+      <Button :disabled="countingDown" @click="rawValue = '2500'">
+        <IconChicken class="h-5 w-5 fill-current" />
+        Chicken
+      </Button>
 
-          <Button
-            v-else
-            class="absolute will-change-transform"
-            color="red"
-            :disabled="!countingDown"
-            @click="countingDown = false"
-          >
-            Pause
-            <IconPause />
-          </Button>
-        </Transition>
-      </div>
+      <Button :disabled="countingDown" @click="rawValue = '1500'">
+        <IconCurry class="h-5 w-5 fill-current" />
+        Chickpea Curry
+      </Button>
     </div>
 
     <TransitionSlideInLeft>
-      <div
+      <LazyTimerNotification
         v-if="showNotification"
-        class="notification fixed right-7 top-20 grid grid-cols-[min-content_auto] gap-x-9 gap-y-2 rounded-md py-2.5 pl-4 pr-10 text-sm"
-      >
-        <IconCheckCircle class="row-span-2 self-center text-green-500" />
-        <div class="tracking-wide">Timer finished!</div>
-        <button
-          class="transition-color justify-self-end rounded-md px-2 py-1 ease-out hover:bg-base-400 active:scale-95"
-          @click="closeNotificationAndStopBeeping"
-        >
-          OK
-        </button>
-      </div>
+        @ok="closeNotificationAndStopBeeping"
+      />
     </TransitionSlideInLeft>
   </div>
 </template>
@@ -260,26 +213,3 @@ const closeNotificationAndStopBeeping = () => {
   beep.pause()
 }
 </script>
-
-<style scoped>
-.slide-up-enter-active,
-.slide-up-leave-active {
-  @apply transition duration-250 ease-out;
-}
-
-.slide-up-enter-from {
-  @apply translate-y-7 opacity-0;
-}
-
-.slide-up-leave-to {
-  @apply -translate-y-7 opacity-0;
-}
-
-.notification {
-  background: linear-gradient(
-    to right,
-    theme("colors.green.700") -10%,
-    theme("colors.base.500") 40%
-  );
-}
-</style>

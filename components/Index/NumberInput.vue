@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: number): number
+  (event: "update:modelValue", value: number): void
 }>()
 
 const value = computed<number>({
