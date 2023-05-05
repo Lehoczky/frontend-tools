@@ -1,9 +1,14 @@
 <template>
-  <aside>
+  <aside class="hidden sm:block">
     <nav aria-labelledby="aside-toc">
-      <div id="aside-toc" class="mb-2 text-lg">Table of contents</div>
+      <div id="aside-toc" class="mb-2 text-2xl lg:text-lg">
+        Table of contents
+      </div>
 
-      <ul v-if="value.links" class="space-y-0.5">
+      <ul
+        v-if="value.links"
+        class="flex-wrap gap-x-8 gap-y-1.5 sm:flex lg:flex-col lg:gap-0.5"
+      >
         <li v-for="link in value.links" :key="link.text">
           <NuxtLink
             :to="`#${link.id}`"

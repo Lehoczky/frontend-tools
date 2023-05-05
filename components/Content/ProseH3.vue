@@ -3,7 +3,7 @@
     <NuxtLink :to="`#${id}`">
       <slot />
       <IconAnchor
-        class="ml-2 inline-block text-lg opacity-0 transition-opacity group-hover:opacity-100"
+        class="ml-2 hidden text-lg opacity-0 transition-opacity group-hover:opacity-100 sm:inline-block"
       />
     </NuxtLink>
   </h3>

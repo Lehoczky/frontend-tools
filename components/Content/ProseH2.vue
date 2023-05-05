@@ -6,7 +6,7 @@
     <NuxtLink :to="`#${id}`">
       <slot />
       <IconAnchor
-        class="ml-3 inline-block text-xl opacity-0 transition-opacity group-hover:opacity-100"
+        class="ml-3 hidden text-xl opacity-0 transition-opacity group-hover:opacity-100 sm:inline-block"
       />
     </NuxtLink>
   </h2>
