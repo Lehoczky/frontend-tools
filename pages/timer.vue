@@ -1,9 +1,5 @@
 <template>
-  <article class="p-article">
-    <Head>
-      <Title>{{ title }}</Title>
-    </Head>
-
+  <div>
     <h1 class="mb-article-heading text-3xl">Timer</h1>
 
     <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-end">
@@ -158,16 +154,11 @@
         </button>
       </div>
     </TransitionSlideInLeft>
-  </article>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {
-  dropLeadingZeros,
-  isDigit,
-  loadBeepSound,
-  secondsToDuration,
-} from "~~/utils"
+import { dropLeadingZeros, isDigit, secondsToDuration } from "~~/utils"
 
 const MAX_INPUT_LENGTH = 6
 const input = ref<HTMLInputElement>()
@@ -177,11 +168,9 @@ const title = ref("Timer")
 
 const countingDown = ref(false)
 const showNotification = ref(false)
-let beepSound: HTMLAudioElement | undefined = undefined
-const beepingInterval = useIntervalFn(() => void beepSound.play(), 2500, {
-  immediate: false,
-  immediateCallback: true,
-})
+const beep = useBeeping()
+
+useHead({ title })
 
 const focusInput = () => {
   input.value.selectionStart = input.value.value.length
@@ -229,9 +218,7 @@ const { startInterval, pauseInterval } = useBackgroundInterval(decrementTime)
 
 watch(countingDown, (newValue) => {
   if (newValue) {
-    if (!beepSound) {
-      beepSound = loadBeepSound()
-    }
+    beep.load()
     const time = secondsInReadableForm(parsedSeconds.value)
     title.value = `${time}`
     startInterval()
@@ -265,12 +252,12 @@ const startButtonDisabled = computed(
 
 const showNotificationAndStartBeeping = () => {
   showNotification.value = true
-  beepingInterval.resume()
+  beep.resume()
 }
 
 const closeNotificationAndStopBeeping = () => {
   showNotification.value = false
-  beepingInterval.pause()
+  beep.pause()
 }
 </script>
 
