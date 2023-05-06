@@ -4,42 +4,76 @@
   >
     <nav class="mr-6 flex w-full items-center justify-between">
       <button class="p-3 sm:hidden" @click="open = !open">
-        <IconClose v-if="open" />
-        <IconMenu v-else />
+        <IconMenu />
       </button>
 
       <ul
-        class="fixed -left-3/4 bottom-0 top-16 flex w-3/4 flex-col gap-2 bg-base-500 transition-transform duration-300 ease-out sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:top-auto sm:w-auto sm:translate-x-0 sm:flex-row"
+        class="fixed -left-[80%] bottom-0 top-0 z-10 flex w-[80%] flex-col gap-2 bg-base-500 shadow-lg transition-transform duration-200 ease-out sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:top-auto sm:w-auto sm:translate-x-0 sm:flex-row sm:shadow-none"
         :class="{ 'translate-x-full': open }"
       >
-        <li>
-          <HeaderLinkButton to="/" @click="open = false">Home</HeaderLinkButton>
-        </li>
+        <div class="flex h-16 items-center p-2.5 sm:hidden">
+          <button class="p-3 sm:hidden" @click="open = !open">
+            <IconClose />
+          </button>
+        </div>
 
-        <li>
+        <HeaderListItem>
+          <HeaderLinkButton to="/" @click="open = false">
+            <IconHome class="inline-block sm:hidden" />
+            Home
+          </HeaderLinkButton>
+        </HeaderListItem>
+
+        <HeaderListItem>
           <HeaderLinkButton to="/timer" @click="open = false">
+            <IconTimer class="inline-block sm:hidden" />
             Timer
           </HeaderLinkButton>
-        </li>
+        </HeaderListItem>
 
-        <li>
+        <HeaderListItem>
           <HeaderLinkButton to="/fluid-css" @click="open = false">
+            <IconCSS class="inline-block sm:hidden" />
             Fluid CSS
           </HeaderLinkButton>
-        </li>
+        </HeaderListItem>
 
-        <li>
+        <HeaderListItem>
           <HeaderLinkButton to="/style-guide" @click="open = false">
+            <IconCode class="inline-block sm:hidden" />
             Style Guide
           </HeaderLinkButton>
-        </li>
+        </HeaderListItem>
       </ul>
 
       <HeaderSpotifyLink />
+
+      <div
+        v-if="open"
+        class="fixed inset-0 bg-black bg-opacity-20"
+        @click="open = false"
+      />
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
-const open = ref(false)
+const props = defineProps({
+  menuOpen: {
+    type: Boolean,
+    default: false,
+  },
+})
+const emit = defineEmits<{
+  (event: "update:menuOpen", value: boolean): void
+}>()
+
+const open = computed({
+  get() {
+    return props.menuOpen
+  },
+  set(value: boolean) {
+    emit("update:menuOpen", value)
+  },
+})
 </script>

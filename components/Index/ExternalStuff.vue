@@ -2,7 +2,7 @@
   <article class="p-article">
     <h2 class="mb-article-heading text-3xl">External Stuff</h2>
 
-    <div class="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:gap-3">
+    <div class="flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:gap-3">
       <Button to="https://jakearchibald.github.io/svgomg/">
         <IconSVGO class="h-[1em] w-[1em] grayscale" />
         SVG Optimizer
