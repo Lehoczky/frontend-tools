@@ -18,7 +18,12 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
-  modules: ["@vueuse/nuxt", "@nuxt/content", "@nuxtjs/google-fonts"],
+  modules: [
+    "@vueuse/nuxt",
+    "@nuxt/content",
+    "@nuxtjs/google-fonts",
+    "nuxt-simple-robots",
+  ],
   typescript: {
     shim: false,
     strict: false,
@@ -42,5 +47,8 @@ export default defineNuxtConfig({
         wght: [400, 500, 600],
       },
     },
+  },
+  robots: {
+    siteUrl: "https://lehoczky.github.io/frontend-tools/",
   },
 })

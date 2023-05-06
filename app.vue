@@ -16,4 +16,6 @@ useHead({
     return titleChunk ? `${titleChunk} | ${PAGE_TITLE}` : PAGE_TITLE
   },
 })
+
+defineRobotMeta()
 </script>
