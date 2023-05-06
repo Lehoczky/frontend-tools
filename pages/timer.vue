@@ -3,13 +3,7 @@
     <h1 class="mb-article-heading text-3xl">Timer</h1>
 
     <div class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end">
-      <div
-        class="flex cursor-text rounded-md bg-base-500 px-5 py-4 text-xl outline-none ring-gray-600 focus-within:ring"
-        :class="{
-          'text-opacity-50': editing,
-        }"
-        @click="focusInput"
-      >
+      <TimerInput v-model="rawValue" v-model:editing="editing">
         <TimerDigit
           :fade="editing && rawValue.length <= 5"
           :hide="!editing && numbers[0] === 0 && rawValue.length <= 5"
@@ -60,18 +54,7 @@
         <TimerCharacter :fade="editing && rawValue.length === 0">
           s
         </TimerCharacter>
-
-        <input
-          ref="input"
-          v-model="rawValue"
-          type="tel"
-          class="sr-only"
-          :maxlength="MAX_INPUT_LENGTH"
-          @keypress="preventNonNumericInput($event)"
-          @focus="editing = true"
-          @blur="editing = false"
-        />
-      </div>
+      </TimerInput>
 
       <TimerControlButtons
         v-model:counting-down="countingDown"
@@ -111,12 +94,10 @@
 </template>
 
 <script setup lang="ts">
-import { dropLeadingZeros, isDigit, secondsToDuration } from "~~/utils"
+import { MAX_INPUT_LENGTH } from "@/components/Timer/TimerInput.vue"
 
-const MAX_INPUT_LENGTH = 6
-const input = ref<HTMLInputElement>()
-const editing = ref(false)
 const rawValue = ref("")
+const editing = ref(false)
 const title = ref("Timer")
 
 const countingDown = ref(false)
@@ -124,17 +105,6 @@ const showNotification = ref(false)
 const beep = useBeeping()
 
 useHead({ title })
-
-const focusInput = () => {
-  input.value.selectionStart = input.value.value.length
-  input.value.focus()
-}
-
-const preventNonNumericInput = (event: KeyboardEvent) => {
-  if (!isDigit(event.key)) {
-    event.preventDefault()
-  }
-}
 
 const numbers = computed(() => {
   const valueAsNumbers = Array.from(rawValue.value, Number)
