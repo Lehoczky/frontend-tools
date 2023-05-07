@@ -1,7 +1,7 @@
 <template>
   <div>
     <LoadingIndicator />
-    <Header v-model:menu-open="menuOpen" />
+    <Header />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -20,16 +20,4 @@ useSeoMeta({
   description: "Collection of utilities to make frontend development easier.",
 })
 defineRobotMeta()
-
-const menuOpen = ref(false)
-const body = ref()
-const isLocked = useScrollLock(body)
-
-onMounted(() => {
-  body.value = document.querySelector("body")
-})
-
-watch(menuOpen, (isOpen) => {
-  isLocked.value = isOpen
-})
 </script>

@@ -58,22 +58,16 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  menuOpen: {
-    type: Boolean,
-    default: false,
-  },
-})
-const emit = defineEmits<{
-  (event: "update:menuOpen", value: boolean): void
-}>()
+const open = ref(false)
 
-const open = computed({
-  get() {
-    return props.menuOpen
-  },
-  set(value: boolean) {
-    emit("update:menuOpen", value)
-  },
+const body = ref()
+const isLocked = useScrollLock(body)
+
+onMounted(() => {
+  body.value = document.querySelector("body")
+})
+
+watch(open, (isOpen) => {
+  isLocked.value = isOpen
 })
 </script>
