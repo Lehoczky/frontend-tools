@@ -1,9 +1,9 @@
 <template>
   <article class="p-article">
     <h1 class="mb-article-heading text-3xl">Fluid CSS calculator</h1>
-    <div class="grid grid-cols-[auto_1fr] items-center gap-7">
+    <div class="grid grid-cols-[auto_1fr] items-center gap-2 sm:gap-7">
       <div class="text-2xl">Units:</div>
-      <div class="col-span-2 sm:col-span-1">
+      <div class="col-span-2 mb-2.5 sm:col-span-1 sm:mb-0">
         <RadioGroup id="fluid-css-unit" v-model="unit" class="flex gap-5">
           <RadioButton value="rem">REM</RadioButton>
           <RadioButton value="px">PX</RadioButton>
@@ -12,9 +12,9 @@
 
       <div class="text-2xl">Range:</div>
       <div
-        class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
+        class="col-span-2 mb-2.5 flex items-center gap-2 text-xl sm:col-span-1 sm:mb-0 sm:gap-5"
       >
-        <div>from</div>
+        <div class="hidden sm:block">from</div>
         <IndexNumberInput v-model="minValue" class="max-w-[9rem]" />
         <div>to</div>
         <IndexNumberInput v-model="maxValue" class="max-w-[9rem]" />
@@ -25,7 +25,7 @@
       <div
         class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
       >
-        <div>from</div>
+        <div class="hidden sm:block">from</div>
         <IndexNumberInput v-model="minViewport" class="max-w-[9rem]" />
         <div>to</div>
         <IndexNumberInput v-model="maxViewport" class="max-w-[9rem]" />

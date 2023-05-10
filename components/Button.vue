@@ -2,7 +2,7 @@
   <component
     :is="component"
     :to="to"
-    class="transition-color inline-flex items-center gap-1.5 rounded-md px-4 py-2 ease-out active:scale-95 disabled:opacity-50 disabled:active:scale-100"
+    class="transition-color inline-flex items-center gap-1.5 rounded-md px-6 py-4 ease-out active:scale-95 disabled:opacity-50 disabled:active:scale-100 sm:px-4 sm:py-2"
     :class="{
       'bg-base-500 hover:bg-base-400 disabled:hover:bg-base-500':
         color === 'default',

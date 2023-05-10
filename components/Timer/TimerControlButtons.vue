@@ -1,25 +1,27 @@
 <template>
-  <div class="relative h-10">
+  <div class="relative h-12 w-12">
     <Transition name="slide-up">
       <Button
         v-if="!countingDown"
-        class="absolute will-change-transform"
+        class="absolute !p-3 will-change-transform sm:px-6 sm:py-4"
         color="blue"
         :disabled="startDisabled"
+        aria-label="Start"
         @click="emit('update:countingDown', true)"
       >
-        Start
-        <IconPlay />
+        <span class="hidden sm:inline">Start</span>
+        <IconPlay class="h-9 w-9 sm:h-5 sm:w-5" />
       </Button>
 
       <Button
         v-else
-        class="absolute will-change-transform"
+        class="absolute !p-3 will-change-transform sm:px-6 sm:py-4"
         color="red"
+        aria-label="Pause"
         @click="emit('update:countingDown', false)"
       >
-        Pause
-        <IconPause />
+        <span class="hidden sm:inline">Pause</span>
+        <IconPause class="h-9 w-9 sm:h-5 sm:w-5" />
       </Button>
     </Transition>
   </div>

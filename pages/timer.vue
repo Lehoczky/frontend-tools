@@ -2,7 +2,7 @@
   <div>
     <h1 class="mb-article-heading text-3xl">Timer</h1>
 
-    <div class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end">
+    <div class="mb-12 flex items-start gap-4 sm:mb-8 sm:flex-row sm:items-end">
       <TimerInput v-model="rawValue" v-model:editing="editing">
         <TimerDigit
           :fade="editing && rawValue.length <= 5"
@@ -62,7 +62,7 @@
       />
     </div>
 
-    <div class="flex flex-wrap gap-4">
+    <div class="flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:gap-3">
       <Button :disabled="countingDown" @click="rawValue = '500'">
         <IconTea class="h-5 w-5 fill-current" />
         Chamomile tea
