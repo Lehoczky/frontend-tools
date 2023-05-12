@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/google-fonts",
     "nuxt-simple-robots",
+    "nuxt-simple-sitemap",
   ],
   typescript: {
     shim: false,
@@ -49,6 +50,9 @@ export default defineNuxtConfig({
     },
   },
   robots: {
+    siteUrl: "https://lehoczky.github.io/frontend-tools/",
+  },
+  sitemap: {
     siteUrl: "https://lehoczky.github.io/frontend-tools/",
   },
 })
