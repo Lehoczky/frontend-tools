@@ -1,0 +1,6 @@
+# START nuxt-simple-robots (indexable: true)
+User-agent: *
+Disallow: 
+
+Sitemap: https://lehoczky.github.io/frontend-tools/sitemap.xml
+# END nuxt-simple-robots
