@@ -8,11 +8,12 @@
     "source.fixAll.eslint": true,
     "source.fixAll.markdownlint": true
   },
-  "volar.inlayHints.eventArgumentInInlineHandlers": false,
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
   "stylelint.validate": ["vue", "css"],
   "cSpell.words": ["instanceof", "Nuxt", "typeof", "vueuse", "wght"],
-  "vue.codeActions.enabled": false
+  "vue.codeActions.enabled": false,
+  "vue.complete.casing.props": "kebab",
+  "vue.complete.casing.tags": "pascal"
 }
