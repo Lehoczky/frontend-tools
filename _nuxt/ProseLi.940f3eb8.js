@@ -1,1 +1,0 @@
-import{i as s,o,b as t,h as n}from"./entry.e400ff13.js";const r={},c={class:"list-outside leading-snug"};function a(e,l){return o(),t("li",c,[n(e.$slots,"default")])}const _=s(r,[["render",a]]);export{_ as default};
