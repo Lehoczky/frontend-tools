@@ -55,4 +55,8 @@ export default defineNuxtConfig({
   sitemap: {
     siteUrl: "https://lehoczky.github.io/frontend-tools/",
   },
+  experimental: {
+    typedPages: true,
+    watcher: "chokidar",
+  },
 })
