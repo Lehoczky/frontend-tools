@@ -18,13 +18,13 @@
       class="col-span-2 mb-2.5 flex items-center gap-2 text-xl sm:col-span-1 sm:mb-0 sm:gap-5"
     >
       <div class="hidden sm:block">from</div>
-      <IndexNumberInput
+      <NumberInput
         :model-value="minValue"
         class="max-w-[9rem]"
         @update:model-value="$emit('update:minValue', $event)"
       />
       <div>to</div>
-      <IndexNumberInput
+      <NumberInput
         :model-value="maxValue"
         class="max-w-[9rem]"
         @update:model-value="$emit('update:maxValue', $event)"
@@ -37,13 +37,13 @@
       class="col-span-2 flex items-center gap-2 text-xl sm:col-span-1 sm:gap-5"
     >
       <div class="hidden sm:block">from</div>
-      <IndexNumberInput
+      <NumberInput
         :model-value="minViewport"
         class="max-w-[9rem]"
         @update:model-value="$emit('update:minViewport', $event)"
       />
       <div>to</div>
-      <IndexNumberInput
+      <NumberInput
         :model-value="maxViewport"
         class="max-w-[9rem]"
         @update:model-value="$emit('update:maxViewport', $event)"

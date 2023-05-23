@@ -5,7 +5,7 @@
     <div
       class="grid place-content-start place-items-center gap-5 sm:grid-flow-col"
     >
-      <IndexNumberInput
+      <NumberInput
         :model-value="leftInput"
         class="text-4xl"
         :suffix="showPXInLeftInput ? 'px' : 'rem'"
@@ -20,7 +20,7 @@
         <IconArrowSwitch class="rotate-90 text-gray-500 sm:rotate-0" />
       </button>
 
-      <IndexNumberInput
+      <NumberInput
         :model-value="rightInput"
         class="text-4xl"
         :suffix="showPXInLeftInput ? 'rem' : 'px'"
