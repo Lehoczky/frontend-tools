@@ -5,6 +5,9 @@
     "davidanson.vscode-markdownlint",
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "streetsidesoftware.code-spell-checker",
+    "nuxt.mdc",
+    "redhat.vscode-yaml"
   ]
 }

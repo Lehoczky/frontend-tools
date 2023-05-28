@@ -6,13 +6,14 @@
   "eslint.validate": ["javascript", "typescript", "yaml", "vue"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
-    "source.fixAll.markdownlint": true
+    "source.fixAll.markdownlint": true,
+    "source.fixAll.stylelint": true
   },
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "stylelint.validate": ["vue", "css"],
-  "cSpell.words": ["instanceof", "Nuxt", "typeof", "vueuse", "wght"],
+  "stylelint.validate": ["vue", "css", "postcss"],
+  "cSpell.words": ["instanceof", "Nuxt", "nuxtjs", "typeof", "vueuse", "wght"],
   "vue.codeActions.enabled": false,
   "vue.complete.casing.props": "kebab",
   "vue.complete.casing.tags": "pascal"
