@@ -36,6 +36,10 @@ const component = computed(() => {
 })
 
 const additionalProps = computed(() => {
-  return props.to ? { target: "_blank" } : {}
+  return props.to && isExternalLink(props.to) ? { target: "_blank" } : {}
 })
+
+function isExternalLink(url: string) {
+  return url.startsWith("http")
+}
 </script>

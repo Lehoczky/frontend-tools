@@ -44,6 +44,13 @@
             Style Guide
           </HeaderLinkButton>
         </HeaderListItem>
+
+        <HeaderListItem>
+          <HeaderLinkButton to="/guides" @click="open = false">
+            <IconGuide class="inline-block sm:hidden" />
+            Guides
+          </HeaderLinkButton>
+        </HeaderListItem>
       </ul>
 
       <HeaderSpotifyLink />

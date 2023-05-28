@@ -1,3 +1,3 @@
 # Frontend tools
 
-Collection of utilities to make frontend development easier.
+Collection of utilities and guides to make frontend development easier.

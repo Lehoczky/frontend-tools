@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <!--  -->
-  </div>
+  <ContentDoc class="font-sans" />
 </template>
 
 <script setup lang="ts">
 useHead({
-  title: "Learning Vue",
+  title: "PC Setup",
 })
 </script>
