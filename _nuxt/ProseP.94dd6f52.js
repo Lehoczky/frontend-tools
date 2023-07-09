@@ -1,1 +1,0 @@
-import{i as s,o as t,b as o,h as r}from"./entry.dd9801bd.js";const a={},c={class:"my-4 text-base leading-7"};function n(e,l){return t(),o("p",c,[r(e.$slots,"default")])}const d=s(a,[["render",n]]);export{d as default};

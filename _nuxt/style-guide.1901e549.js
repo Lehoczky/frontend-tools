@@ -1,0 +1,1 @@
+import{_ as t,o as s,c as o,r as a}from"./entry.4537489b.js";const c={},r={class:"mx-auto mt-5 w-[95%] max-w-5xl px-2 sm:w-11/12 md:mt-11"};function n(e,m){return s(),o("main",r,[a(e.$slots,"default")])}const _=t(c,[["render",n]]);export{_ as default};

@@ -1,1 +1,0 @@
-import{i as o,o as t,b as r,h as c}from"./entry.dd9801bd.js";const s={},n={class:"border-l-4 border-zinc-700 pl-6 text-zinc-400"};function l(e,a){return t(),r("blockquote",n,[c(e.$slots,"default")])}const d=o(s,[["render",l]]);export{d as default};

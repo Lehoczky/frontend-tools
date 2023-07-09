@@ -1,1 +1,0 @@
-import{i as e,o as s,b as t,h as r}from"./entry.dd9801bd.js";const n={},c={class:"font-bold"};function a(o,l){return s(),t("strong",c,[r(o.$slots,"default")])}const f=e(n,[["render",a]]);export{f as default};
