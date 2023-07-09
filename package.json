@@ -6,8 +6,8 @@
     "eslint:check": "eslint . --ext .js,.ts,.vue --max-warnings=0",
     "styles:check": "stylelint \"./**/*.{css,vue}\" --ignore-path=.gitignore",
     "format:check": "prettier \"./**\" --check --ignore-unknown",
-    "generate": "nuxt generate",
-    "gh:deploy": "npm run generate && gh-pages -d dist -t true",
+    "build": "nuxt build",
+    "gh:deploy": "npm run build && gh-pages -d dist -t true",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
