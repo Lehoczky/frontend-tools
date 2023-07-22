@@ -686,7 +686,7 @@ throw Error("Unexpected property.")
 
 ### Use "error" as parameter name in `catch` clauses
 
-Error parameters [shouldn't be abbreviated](./style-guide#dont-abbreviate), and they are more searchable if they always have the same name.
+Error parameters [shouldn't be abbreviated](#dont-abbreviate), and they are more searchable if they always have the same name.
 
 ```ts
 // Bad
