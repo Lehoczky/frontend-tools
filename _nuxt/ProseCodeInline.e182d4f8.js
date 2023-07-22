@@ -1,0 +1,1 @@
+import{_ as n,o,c as t,r as s}from"./entry.2bb8e0e0.js";const c={},_={class:"mx-px rounded bg-zinc-700 px-1 py-0.5 text-sm font-normal text-zinc-100"};function r(e,d){return o(),t("code",_,[s(e.$slots,"default",{},void 0,!0)])}const l=n(c,[["render",r],["__scopeId","data-v-30263e1c"]]);export{l as default};
