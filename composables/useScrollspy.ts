@@ -15,7 +15,7 @@ export default () => {
         visibleHeadings.value.push(id)
       } else {
         visibleHeadings.value = visibleHeadings.value.filter(
-          (heading) => heading !== id
+          (heading) => heading !== id,
         )
       }
     })
@@ -32,7 +32,7 @@ export default () => {
     (value, oldValue) => {
       activeHeadings.value = value.length === 0 ? oldValue : value
     },
-    { deep: true }
+    { deep: true },
   )
 
   onBeforeMount(() => {

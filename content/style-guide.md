@@ -150,7 +150,7 @@ const address = "One Infinite Loop, Cupertino 95014"
 const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/
 saveCityZipCode(
   address.match(cityZipCodeRegex)[1],
-  address.match(cityZipCodeRegex)[2]
+  address.match(cityZipCodeRegex)[2],
 )
 
 // Good
@@ -407,7 +407,7 @@ const fooSearch: SearchFunction = (source, subString) => {
 ```ts
 // Bad
 const reallyLongVariableName = computed(
-  () => Math.pow(10, 10) + Math.round(2.1)
+  () => Math.pow(10, 10) + Math.round(2.1),
 )
 
 // Good

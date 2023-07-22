@@ -29,7 +29,7 @@ function createWorker(fn: () => void) {
   const blobURL = URL.createObjectURL(
     new Blob(["(", fn.toString(), ")()"], {
       type: "application/javascript",
-    })
+    }),
   )
 
   const worker = new Worker(blobURL)

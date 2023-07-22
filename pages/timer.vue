@@ -112,7 +112,7 @@ const numbers = computed(() => {
   const leadingZeros = new Array(numOfLeadingZeros).fill(
     0,
     0,
-    numOfLeadingZeros
+    numOfLeadingZeros,
   )
   return [...leadingZeros, ...valueAsNumbers]
 })
@@ -170,7 +170,7 @@ const secondsToRawValue = (totalSeconds: number) => {
 }
 
 const startButtonDisabled = computed(
-  () => countingDown.value || parsedSeconds.value === 0
+  () => countingDown.value || parsedSeconds.value === 0,
 )
 
 const showNotificationAndStartBeeping = () => {

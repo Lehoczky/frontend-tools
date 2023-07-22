@@ -7,7 +7,7 @@ export interface RadioGroupState {
 }
 
 export const RadioGroupContext = Symbol(
-  "RadioGroupContext"
+  "RadioGroupContext",
 ) as InjectionKey<RadioGroupState>
 
 export default function useRadioGroupContext(component: string) {
@@ -15,7 +15,7 @@ export default function useRadioGroupContext(component: string) {
 
   if (context === null) {
     throw new Error(
-      `<${component} /> is missing a parent <RadioGroup /> component.`
+      `<${component} /> is missing a parent <RadioGroup /> component.`,
     )
   }
 

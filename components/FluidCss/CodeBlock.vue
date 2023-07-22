@@ -38,7 +38,7 @@ const props = defineProps<{
 const valueDifference = computed(() => props.maxValue - props.minValue)
 const viewportDifference = computed(() => props.maxViewport - props.minViewport)
 const hideCSS = computed(
-  () => isNaN(valueDifference.value) || isNaN(viewportDifference.value)
+  () => isNaN(valueDifference.value) || isNaN(viewportDifference.value),
 )
 const minInClamp = computed(() => Math.min(props.minValue, props.maxValue))
 const maxInClamp = computed(() => Math.max(props.minValue, props.maxValue))
@@ -46,7 +46,7 @@ const factor = computed(() => {
   return (1 / viewportDifference.value) * valueDifference.value
 })
 const constantInCalc = computed(() =>
-  round(props.minValue - props.minViewport * factor.value, 4)
+  round(props.minValue - props.minViewport * factor.value, 4),
 )
 const showConstantPart = computed(() => constantInCalc.value !== 0)
 const viewWidthInCalc = computed(() => round(100 * factor.value, 4))
