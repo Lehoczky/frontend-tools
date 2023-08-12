@@ -1,1 +1,0 @@
-import{_ as s,o as c,c as t,r as _}from"./entry.2bb8e0e0.js";const o={},n={class:"list-disc space-y-2 pl-5"};function r(e,a){return c(),t("ul",n,[_(e.$slots,"default",{},void 0,!0)])}const l=s(o,[["render",r],["__scopeId","data-v-d306c9ce"]]);export{l as default};
