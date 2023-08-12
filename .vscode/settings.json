@@ -16,7 +16,15 @@
   "less.validate": false,
   "scss.validate": false,
   "stylelint.validate": ["vue", "css", "postcss"],
-  "cSpell.words": ["instanceof", "Nuxt", "nuxtjs", "typeof", "vueuse", "wght"],
+  "cSpell.words": [
+    "instanceof",
+    "Nuxt",
+    "nuxtjs",
+    "Skywalker",
+    "typeof",
+    "vueuse",
+    "wght"
+  ],
   "vue.codeActions.enabled": false,
   "vue.complete.casing.props": "kebab",
   "vue.complete.casing.tags": "pascal"

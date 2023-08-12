@@ -26,7 +26,7 @@ const foo = 42
 let bar = 42
 ```
 
-**Enforced with:** [eslint - no-var](https://eslint.org/docs/latest/rules/no-var)
+**Enforced with:** [no-var](https://eslint.org/docs/latest/rules/no-var)
 
 ### Prefer `const` over `let`
 
@@ -39,7 +39,7 @@ const foo = otherValue // Use if "foo" never changes.
 let bar = someValue // Use if "bar" is ever assigned into later on.
 ```
 
-**Enforced with:** [eslint - prefer-const](https://eslint.org/docs/latest/rules/prefer-const)
+**Enforced with:** [prefer-const](https://eslint.org/docs/latest/rules/prefer-const)
 
 ### Use meaningful and pronounceable variable names
 
@@ -70,7 +70,12 @@ There can be exceptions when using abbreviations are conventional:
 - indexes in `for` loops, like `i` and `j`
 - library related conventions, like `req`, `res`, `ctx` when using express.js
 
-Enforced by: [eslint unicorn - prevent-abbreviations](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prevent-abbreviations.md)
+**Additional Reading:**
+
+- [Alienating the Audience: How Abbreviations Hamper Scientific Communication](https://www.psychologicalscience.org/observer/alienating-the-audience-how-abbreviations-hamper-scientific-communication)
+- [Why You Should Stop Using Acronyms Right Now](https://www.inc.com/jeff-steen/why-you-should-stop-using-acronyms-right-now.html)
+
+**Enforced with:** [unicorn/prevent-abbreviations](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prevent-abbreviations.md)
 
 ### Avoid Mental Mapping
 
@@ -138,7 +143,7 @@ const firstElement = first(array)
 const lastElement = last(array)
 ```
 
-Enforced by: [eslint - no-magic-numbers](https://eslint.org/docs/latest/rules/no-magic-numbers#rule-details)
+**Enforced with:** [no-magic-numbers](https://eslint.org/docs/latest/rules/no-magic-numbers#rule-details)
 
 ### Use explanatory variables
 
@@ -194,7 +199,45 @@ const foo = 1234444
 const foo = 1_234_444
 ```
 
-**Enforced with:** [eslint-unicorn - numeric-separators-style](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/numeric-separators-style.md)
+**Enforced with:** [unicorn/numeric-separators-style](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/numeric-separators-style.md)
+
+### Prefer `Number.isNaN()` over `isNaN()`
+
+The [Number.isNaN()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) static method determines whether the passed value is the number value [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN).
+
+Despite the name, the purpose of the [isNaN()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) function isn't to check whether a value is `NaN`. Instead, the purpose is to check whether a value cannot be coerced to a number. This can lead to unexpected results. Check the examples below:
+
+```ts
+isNaN(NaN) // true
+isNaN(Number.NaN) // true
+isNaN(0 / 0) // true
+isNaN("NaN") // true
+isNaN(undefined) // true
+isNaN({}) // true
+isNaN("blabla") // true
+isNaN(true) // false
+isNaN(null) // false
+isNaN(37) // false
+isNaN("37") // false
+isNaN("37.37") // false
+isNaN("") // false
+isNaN(" ") // false
+
+Number.isNaN(NaN) // true
+Number.isNaN(Number.NaN) // true
+Number.isNaN(0 / 0) // true
+Number.isNaN("NaN") // false
+Number.isNaN(undefined) // false
+Number.isNaN({}) // false
+Number.isNaN("blabla") // false
+Number.isNaN(true) // false
+Number.isNaN(null) // false
+Number.isNaN(37) // false
+Number.isNaN("37") // false
+Number.isNaN("37.37") // false
+Number.isNaN("") // false
+Number.isNaN(" ") // false
+```
 
 ## Strings
 
@@ -463,7 +506,7 @@ class NoInstantiation {
 }
 ```
 
-**Enforced with:** [typescript-eslint](https://typescript-eslint.io/rules/no-useless-constructor)
+**Enforced with:** [typescript-eslint/no-useless-constructor](https://typescript-eslint.io/rules/no-useless-constructor)
 
 ### Don't use `#private` fields
 
@@ -553,7 +596,7 @@ class Foo {
 }
 ```
 
-**Enforced with:** [eslint - class-methods-use-this](https://eslint.org/docs/latest/rules/class-methods-use-this)
+**Enforced with:** [class-methods-use-this](https://eslint.org/docs/latest/rules/class-methods-use-this)
 
 ### Container Classes
 
@@ -639,7 +682,7 @@ for (const element of array) {
 }
 ```
 
-Enforced by: [typescript-eslint - prefer-for-of](https://typescript-eslint.io/rules/prefer-for-of)
+**Enforced with:** [typescript-eslint/prefer-for-of](https://typescript-eslint.io/rules/prefer-for-of)
 
 ## Exceptions
 
@@ -655,7 +698,7 @@ throw Error("Foo is not a valid bar.")
 throw new Error("Foo is not a valid bar.")
 ```
 
-**Enforced with:** [eslint-plugin-unicorn - throw-new-error](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v46.0.0/docs/rules/throw-new-error.md)
+**Enforced with:** [unicorn/throw-new-error](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v46.0.0/docs/rules/throw-new-error.md)
 
 ### Only throw Errors
 
@@ -668,6 +711,8 @@ throw "oh noes!"
 // Good
 throw new Error("oh noes!")
 ```
+
+**Enforced with:** [no-throw-literal](https://eslint.org/docs/latest/rules/no-throw-literal)
 
 ### Pass message to built-in `Error`
 
@@ -682,7 +727,7 @@ throw Error("")
 throw Error("Unexpected property.")
 ```
 
-**Enforced with:** [eslint-plugin-unicorn - error-message](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md)
+**Enforced with:** [unicorn/error-message](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md)
 
 ### Use "error" as parameter name in `catch` clauses
 
@@ -726,7 +771,7 @@ try {
 }
 ```
 
-**Enforced with:** [eslint-plugin-unicorn - catch-error-name](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/catch-error-name.md)
+**Enforced with:** [unicorn/catch-error-name](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/catch-error-name.md)
 
 ### Assert thrown errors are instances of `Error`
 
@@ -1036,11 +1081,10 @@ Although linters usually have rules regarding formatting, their maintainers are 
 
 Why?
 
-- Less characters, cleaner source files
 - easier to navigate to the end of each line
-- easier to extend method chains
+- easier to extend or reorder method chains
 
-Enforced by: [Prettier - Semi](https://prettier.io/docs/en/options.html#semicolons)
+**Enforced with:** [Semi](https://prettier.io/docs/en/options.html#semicolons)
 
 ::info
 
