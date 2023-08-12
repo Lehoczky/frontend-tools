@@ -365,7 +365,7 @@ function getFullName({ firstName, lastName }: User) {
 }
 ```
 
-**Enforced with:**: [prefer-destructuring](https://eslint.org/docs/latest/rules/prefer-destructuring)
+**Enforced with:** [prefer-destructuring](https://eslint.org/docs/latest/rules/prefer-destructuring)
 
 ### Use object destructuring for multiple return values, not array destructuring
 
@@ -626,7 +626,7 @@ export function bar() {
 - IDEs can't provide as good suggestions for static class or namespace imported properties when you start typing property names
 - It's more difficult to statically analyze code for unused variables, etc. when they're all on the class ([see: Finding dead code (and dead types) in TypeScript](https://effectivetypescript.com/2020/10/20/tsprune/)).
 
-**Enforced with:**: [no-extraneous-class](https://typescript-eslint.io/rules/no-extraneous-class)
+**Enforced with:** [no-extraneous-class](https://typescript-eslint.io/rules/no-extraneous-class)
 
 ## Control structures
 
