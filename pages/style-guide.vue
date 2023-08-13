@@ -15,6 +15,7 @@
 
 <script setup>
 definePageMeta({
+  title: "Style Guide",
   layout: "style-guide",
 })
 </script>

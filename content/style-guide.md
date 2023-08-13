@@ -990,9 +990,9 @@ if (foo) {
 
 **Enforced with:** [unicorn/no-nested-ternary](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-nested-ternary.md)
 
-### Don't ignore the return value of ternary expression
+### Don't ignore the return value of ternary expressions
 
-Use `if-else` blocks when you don't care about the value of the ternary expression left and right side.
+Use `if-else` blocks when you don't care about the value of the ternary expression's left and right side.
 
 ```ts
 // Bad
