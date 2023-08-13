@@ -17,6 +17,7 @@
   "scss.validate": false,
   "stylelint.validate": ["vue", "css", "postcss"],
   "cSpell.words": [
+    "concat",
     "instanceof",
     "Nuxt",
     "nuxtjs",

@@ -289,7 +289,226 @@ Template strings give you a readable, concise syntax with proper newlines and st
 
 **Enforced with:** [prefer-template](https://eslint.org/docs/latest/rules/prefer-template)
 
+### Prefer `.includes()` over `.indexOf()` when checking for existence or non-existence
+
+Strings have [.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) in addition to [.indexOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf). Prefer `.includes()` over comparing the value of `.indexOf()`.
+
+```ts
+// Bad
+str.indexOf("foo") > -1
+str.indexOf("foo") === -1
+
+// Good
+str.includes("foo")
+!str.includes("foo")
+```
+
+**Enforced with:** [unicorn/prefer-includes](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-includes.md)
+
+### Prefer the spread operator over `String.split('')`
+
+```ts
+// Bad
+const characters = string.split("")
+
+// Good
+const characters = [...string]
+```
+
+**Enforced with:** [unicorn/prefer-spread](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-spread.md)
+
+### Prefer `String.startsWith()` and `String.endsWith()`
+
+There are multiple ways to verify if a string starts or ends with a specific string, such as `foo.indexOf('bar') === 0`{lang="ts"}. As of ES2015, the most common way in JavaScript is to use [String.startsWith()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) and [String.endsWith()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith). Keeping to those methods consistently helps with code readability.
+
+```ts
+// Bad
+foo[0] === "b"
+foo.charAt(0) === "b"
+foo.indexOf("bar") === 0
+foo.slice(0, 3) === "bar"
+foo.substring(0, 3) === "bar"
+foo.match(/^bar/) != null
+;/^bar/.test(foo)
+
+// ends with
+foo[foo.length - 1] === "b"
+foo.charAt(foo.length - 1) === "b"
+foo.lastIndexOf("bar") === foo.length - 3
+foo.slice(-3) === "bar"
+foo.substring(foo.length - 3) === "bar"
+foo.match(/bar$/) != null
+;/bar$/.test(foo)
+
+// Good
+foo.startsWith("bar")
+foo.endsWith("bar")
+```
+
+**Enforced with:** [typescript-eslint/prefer-string-starts-ends-with](https://typescript-eslint.io/rules/prefer-string-starts-ends-with)
+
 ## Arrays
+
+### Combine multiple `Array.push()` into one call
+
+[Array.push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) accepts multiple arguments. Multiple calls should be combined into one.
+
+```ts
+// Bad
+foo.push(1)
+foo.push(2, 3)
+
+// Good
+foo.push(1, 2, 3)
+```
+
+**Enforced with:** [unicorn/no-array-push-push](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-push-push.md)
+
+### Don't use `Array.reduce`
+
+[Array.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) usually result in hard-to-read and [less performant](https://www.richsnapp.com/article/2019/06-09-reduce-spread-anti-pattern) code. In almost every case, it can be replaced by [.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map), [.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), or a [for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) loop.
+
+> All code using array.reduce should be rewritten without array.reduce so it's readable by humans
+>
+> [Jake Archibald](https://twitter.com/jaffathecake/status/1213077702300852224)
+
+**Exception**: It's only somewhat useful in the rare case of summing up numbers
+
+```ts
+// Bad
+array.reduce(reducer, initialValue)
+
+// Good
+let result = initialValue
+
+for (const element of array) {
+  result += element
+}
+
+// Still Good
+array.reduce((total, value) => total + value)
+```
+
+**Enforced with:** [unicorn/no-array-reduce](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-array-reduce.md)
+
+### Prefer `Array.find` over first or last element from `.filter`
+
+[Array.find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) and [Array.findLast()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast) breaks the loop as soon as it finds a match and doesn't create a new array.
+
+```ts
+// Bad
+const item = array.filter((x) => isUnicorn(x))[0]
+const [item] = array.filter((x) => isUnicorn(x))
+
+// Good
+const item = array.find((x) => isUnicorn(x))
+const item = array.findLast((x) => isUnicorn(x))
+```
+
+**Enforced with:** [unicorn/prefer-array-find](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-array-find.md)
+
+### Prefer `Array.flat()` over legacy techniques to flatten arrays
+
+ES2019 introduced a new method [Array.flat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) that flatten arrays.
+
+```ts
+// Bad
+const foo = array.flatMap((x) => x)
+const foo = array.reduce((a, b) => [...a, ...b], [])
+const foo = [].concat(...array)
+const foo = _.flatten(array)
+
+// Good
+const foo = array.flat()
+```
+
+**Enforced with:** [unicorn/prefer-array-flat](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-array-flat.md)
+
+### Prefer `.includes()` over `.indexOf()` and `Array.some()` when checking for existence or non-existence
+
+Arrays have [.includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) in addition to [.indexOf()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf). Prefer `.includes()` over comparing the value of `.indexOf()`.
+
+[Array.some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some) is intended for more complex needs. If you are just looking for the index where the given item is present, the code can be simplified to use `Array.includes()`. This applies to any search with a literal, a variable, or any expression that doesn't have any explicit side effects. However, if the expression you are looking for relies on an item related to the function (its arguments, the function self, etc.), the case is still valid.
+
+```ts
+// Bad
+x.indexOf("foo") != -1
+x.indexOf("foo") === -1
+const isFound = foo.some((x) => x === "foo")
+
+// Good
+x.includes("foo")
+
+// Still Good, `some` isn't used to find a literal value in the array
+const isFound = foo.some((x) => x == undefined)
+const isFound = foo.some((x) => x !== "foo")
+const isFound = foo.some((x) => y.x === "foo")
+```
+
+**Enforced with:** [typescript-eslint/prefer-includes](https://typescript-eslint.io/rules/prefer-includes/)
+
+### Prefer` Array.flatMap()` over `Array.map().flat()`
+
+[Array.flatMap()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap) performs [Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [Array.flat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) in one step.
+
+```ts
+// Bad
+const foo = bar.map((element) => unicorn(element)).flat()
+const foo = bar.map((element) => unicorn(element)).flat(1)
+
+// Good
+const foo = bar.flatMap((element) => unicorn(element))
+const foo = bar.map((element) => unicorn(element)).flat(2)
+const foo = bar.flat().map((element) => unicorn(element))
+```
+
+**Enforced with:** [unicorn/prefer-array-flat-map](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-array-flat-map.md)
+
+### Prefer `Array.some()` over `Array.filter().length` or `Array.find()` check
+
+```ts
+// Bad
+const hasUnicorn = array.filter(element => isUnicorn(element)).length > 0;
+const hasUnicorn = array.filter(element => isUnicorn(element)).length !== 0;
+const hasUnicorn = array.filter(element => isUnicorn(element)).length >= 1;
+if (array.find(element => isUnicorn(element))) {
+	// …
+}
+const foo = array.find(element => isUnicorn(element)) ? bar : baz;
+const hasUnicorn = array.find(element => isUnicorn(element) !== undefined;
+
+
+// Good
+const hasUnicorn = array.some(element => isUnicorn(element));
+if (array.some(element => isUnicorn(element))) {
+	// …
+}
+const foo = array.find(element => isUnicorn(element)) || bar;
+```
+
+**Enforced with:** [unicorn/prefer-array-some](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-array-some.md)
+
+### Prefer the spread operator over `Array.from()`, `Array.concat()` and `Array.slice()`
+
+Enforces the use of [the spread operator (...)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) over outdated patterns. This also helps keep consistency by using a single flexible operator instead of:
+
+- [Array.from()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
+- [Array.concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
+- [Array.slice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+
+```ts
+// Bad
+Array.from(set).map((element) => foo(element))
+const array = array1.concat(array2)
+const copy = array.slice()
+
+// Good
+;[...set].map((element) => foo(element))
+const array = [...array1, ...array2]
+const copy = [...array]
+```
+
+**Enforced with:** [unicorn/prefer-spread](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-spread.md)
 
 ## Objects
 
@@ -393,6 +612,22 @@ const { left, top } = processInput(input)
 
 You can add new properties over time or change the order of things without breaking call sites.
 
+### Don't use useless fallback when spreading in object literals
+
+Spreading [falsy values](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) in object literals won't add any unexpected properties, so it's unnecessary to add an empty object as fallback.
+
+```ts
+// Bad
+const object = { ...(foo || {}) }
+const object = { ...(foo ?? {}) }
+
+// Good
+const object = { ...foo }
+const array = [...(foo || [])]
+```
+
+**Enforced with:** [unicorn/no-useless-fallback-in-spread](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-useless-fallback-in-spread.md)
+
 ## Functions
 
 ### Don't use flags as function parameters
@@ -462,7 +697,7 @@ const reallyLongVariableName = computed(() => {
 const reallyLongVariableName = computed(() => Math.pow(10, 10))
 ```
 
-### Prefer callback shorthand for unbound named functions
+### Prefer passing a function reference directly to iterator methods
 
 ```ts
 // Bad
@@ -527,6 +762,28 @@ class Clazz {
 **Why?**
 
 Private identifiers cause substantial emit size and performance regressions when down-leveled by TypeScript, and are unsupported before ES2015. They can only be downleveled to ES2015, not lower. At the same time, they do not offer substantial benefits when static type checking is used to enforce visibility.
+
+### Don't use explicit `public` accessibility modifiers
+
+TypeScript allows placing explicit `public`, `protected`, and `private` accessibility modifiers in front of class members. The modifiers exist solely in the type system and just serve to describe who is allowed to access those members.
+
+Leaving off accessibility modifiers makes for less code to read and write. Members are `public` by default.
+
+```ts
+// Bad
+class Foo {
+  public bar = 1
+  private asd = 2
+}
+
+// Good
+class Foo {
+  bar = 1
+  private asd = 2
+}
+```
+
+**Enforced with:** [typescript-eslint/explicit-member-accessibility](https://typescript-eslint.io/rules/explicit-member-accessibility)
 
 ### Prefer parameter properties
 
@@ -666,6 +923,112 @@ if (!isRunning) {
 }
 ```
 
+### Prefer ternary expressions over simple `if-else` statements
+
+"simple" means the consequent and alternate are each one line and have the same basic type and form.
+
+Using an `if-else` statement typically results in more lines of code than a single-line ternary expression, which leads to an unnecessarily larger codebase that is more difficult to maintain.
+
+Additionally, using an `if-else` statement can result in defining variables using `let` or `var` solely to be reassigned within the blocks. This leads to variables being unnecessarily mutable.
+
+```ts
+// Bad
+function unicorn() {
+  if (test) {
+    return a
+  } else {
+    return b
+  }
+}
+
+if (test) {
+  throw new Error("foo")
+} else {
+  throw new Error("bar")
+}
+
+let foo
+if (test) {
+  foo = 1
+} else {
+  foo = 2
+}
+
+// Good
+function unicorn() {
+  return test ? a : b
+}
+
+const error = test ? new Error("foo") : new Error("bar")
+throw error
+
+const foo = test ? 1 : 2
+```
+
+**Enforced with:** [unicorn/prefer-ternary](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-ternary.md)
+
+### Don't nest ternary expressions
+
+Nesting ternary expressions can make code more difficult to understand.
+
+```ts
+// Bad
+const thing = foo ? bar : baz === qux ? quxx : foobar
+
+// Good
+const thing = foo ? bar : foobar
+
+let thing
+if (foo) {
+  thing = bar
+} else if (baz === qux) {
+  thing = quxx
+} else {
+  thing = foobar
+}
+```
+
+**Enforced with:** [unicorn/no-nested-ternary](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-nested-ternary.md)
+
+### Don't ignore the return value of ternary expression
+
+Use `if-else` blocks when you don't care about the value of the ternary expression left and right side.
+
+```ts
+// Bad
+a ? b() : c()
+
+// Good
+const value = a ? b() : c()
+
+function foo(a, b, c) {
+  return a ? b() : c()
+}
+```
+
+**Enforced with:** [typescript-eslint/no-unused-expressions](https://typescript-eslint.io/rules/no-unused-expressions/)
+
+### Prefer using a logical operator over a ternary
+
+Don't use ternary operators when simpler logical operator alternatives exist.
+
+```ts
+// Bad
+foo ? foo : bar
+foo.bar ? foo.bar : foo.baz
+foo?.bar ? foo.bar : baz
+!bar ? foo : bar
+
+// Good
+foo ?? bar
+foo || bar
+foo ? bar : baz
+foo.bar ?? foo.baz
+foo?.bar ?? baz
+```
+
+**Enforced with:** [unicorn/prefer-logical-operator-over-ternary](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-logical-operator-over-ternary.md)
+
 ### Prefer `for-of` loops
 
 Many developers default to writing for `(let i = 0; i < ...` loops to iterate over arrays. However, in many of those arrays, the loop iterator variable (e.g. `i`) is only used to access the respective element of the array. In those cases, a `for-of` loop is easier to read and write.
@@ -712,7 +1075,7 @@ throw "oh noes!"
 throw new Error("oh noes!")
 ```
 
-**Enforced with:** [no-throw-literal](https://eslint.org/docs/latest/rules/no-throw-literal)
+**Enforced with:** [typescript-eslint/no-throw-literal](https://typescript-eslint.io/rules/no-throw-literal)
 
 ### Pass message to built-in `Error`
 
@@ -933,6 +1296,114 @@ const actions = function () {
 
 ## JSDoc
 
+### Use complete sentences
+
+Make sure that:
+
+- descriptions start with an uppercase alphabetical character
+- paragraphs start with an uppercase alphabetical character
+- sentences end with a period, question mark, or exclamation mark
+
+```ts
+// Bad
+/**
+ * this is a foo function
+ */
+function foo(bar) {}
+
+/**
+ * @param bar: bar is the first parameter
+ */
+function foo(bar) {}
+
+// Good
+/**
+ * This is a foo function.
+ *
+ * @param bar: Bar is the first parameter.
+ */
+function foo(bar) {}
+```
+
+**Enforced with:** [jsdoc/require-description-complete-sentence](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/require-description-complete-sentence.md)
+
+### Add empty line after the description, but not between tags
+
+```ts
+// Bad
+/**
+ * This is a foo function.
+ * @param bar: Bar is the first parameter.
+ * @param asd: Asd is the second parameter.
+ */
+function foo(bar, asd) {}
+
+/**
+ * This is a foo function.
+ *
+ * @param bar: Bar is the first parameter.
+ *
+ * @param asd: Asd is the second parameter.
+ */
+function foo(bar, asd) {}
+
+// Good
+/**
+ * This is a foo function.
+ *
+ * @param bar: Bar is the first parameter.
+ * @param asd: Asd is the second parameter.
+ */
+function foo(bar, asd) {}
+```
+
+**Enforced with:** [jsdoc/tag-lines](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/tag-lines.md)
+
+### Always use types for params in JavaScript
+
+Adding type information in JSDoc will allow auto-completion and type checking in editors and helps finding type related bugs.
+
+```js
+// Bad
+/**
+ * @param bar
+ */
+function foo(bar) {}
+
+// Good
+/**
+ * @param {number} bar
+ */
+function foo(bar) {}
+```
+
+**Enforced with:** [jsdoc/require-param-type](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/require-param-type.md)
+
+### Don't use JSDoc types with TypeScript
+
+JSDoc type declarations are redundant in TypeScript
+
+```ts
+// Bad
+/**
+ * @param {number} bar
+ */
+function foo(bar: number) {}
+
+/**
+ * @param {number} bar
+ */
+function foo(bar) {}
+
+// Good
+/**
+ * @param bar
+ */
+function foo(bar: number) {}
+```
+
+**Enforced with:** [jsdoc/no-types](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/no-types.md)
+
 ### Place documentation prior to decorators
 
 ```ts
@@ -1015,6 +1486,21 @@ function func(): Foo {
 ```
 
 ## Modules
+
+### Add an empty line after import statements
+
+```ts
+// Bad
+import * as foo from "foo"
+const FOO = "BAR"
+
+// Good
+import * as foo from "foo"
+
+const FOO = "BAR"
+```
+
+**Enforced with:** [import/newline-after-import](https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/newline-after-import.md)
 
 ### Only use named exports
 
