@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/google-fonts",
-    "@nuxtjs/algolia",
+    // "@nuxtjs/algolia",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
   ],
@@ -54,6 +54,8 @@ export default defineNuxtConfig({
     },
   },
   algolia: {
+    apiKey: process.env.ALGOLIA_API_KEY ?? "<MISSING-API-KEY>",
+    applicationId: process.env.ALGOLIA_APPLICATION_ID ?? "<MISSING-APP-ID>",
     docSearch: {
       searchParameters: {
         facetFilters: ["lang:en-US"],
