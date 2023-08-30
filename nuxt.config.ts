@@ -5,6 +5,8 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: "en-US",
+        // For algolia dark theme
+        "data-theme": "dark",
       },
       link: [
         {
@@ -22,6 +24,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/google-fonts",
+    "@nuxtjs/algolia",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
   ],
@@ -48,6 +51,14 @@ export default defineNuxtConfig({
       Poppins: {
         wght: [400, 500, 600],
       },
+    },
+  },
+  algolia: {
+    docSearch: {
+      searchParameters: {
+        facetFilters: ["lang:en-US"],
+      },
+      indexName: "frontend-tools",
     },
   },
   robots: {
