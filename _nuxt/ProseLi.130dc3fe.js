@@ -1,0 +1,1 @@
+import{_ as s,o,c as t,r}from"./entry.a7f6c753.js";const c={},n={class:"list-outside leading-snug"};function a(e,l){return o(),t("li",n,[r(e.$slots,"default")])}const i=s(c,[["render",a]]);export{i as default};
