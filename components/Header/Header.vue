@@ -47,7 +47,7 @@
       </ul>
 
       <div class="flex items-center gap-5">
-        <AlgoliaDocSearch class="algolia" />
+        <AlgoliaSearchPatched class="algolia" />
         <HeaderSpotifyLink class="hidden sm:block" />
       </div>
 

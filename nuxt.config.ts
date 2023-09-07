@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/google-fonts",
-    // "@nuxtjs/algolia",
+    "@nuxtjs/algolia",
     "nuxt-simple-robots",
     "nuxt-simple-sitemap",
   ],
