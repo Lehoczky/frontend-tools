@@ -6,7 +6,7 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.validate": ["javascript", "typescript", "yaml", "vue"],
+  "eslint.validate": ["javascript", "typescript", "vue"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.fixAll.markdownlint": true,
@@ -16,18 +16,8 @@
   "less.validate": false,
   "scss.validate": false,
   "stylelint.validate": ["vue", "css", "postcss"],
-  "cSpell.words": [
-    "concat",
-    "docsearch",
-    "instanceof",
-    "Nuxt",
-    "nuxtjs",
-    "Skywalker",
-    "typeof",
-    "vueuse",
-    "wght"
-  ],
   "vue.codeActions.enabled": false,
   "vue.complete.casing.props": "kebab",
-  "vue.complete.casing.tags": "pascal"
+  "vue.complete.casing.tags": "pascal",
+  "cSpell.autoFormatConfigFile": true
 }

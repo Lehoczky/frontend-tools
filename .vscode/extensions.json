@@ -8,6 +8,7 @@
     "bradlc.vscode-tailwindcss",
     "streetsidesoftware.code-spell-checker",
     "nuxt.mdc",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "antfu.goto-alias"
   ]
 }

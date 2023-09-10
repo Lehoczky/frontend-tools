@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+/* eslint-disable */
 import { withoutTrailingSlash } from "ufo"
 import type { PropType } from "vue"
 
