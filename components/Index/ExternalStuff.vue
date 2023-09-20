@@ -45,8 +45,12 @@
       <Button to="https://www.responsivebreakpoints.com/">
         Responsive Image Breakpoints Generator
       </Button>
-      <Button to="https://scrollbar.app/">Scrollbar editor</Button>
+      <Button to="https://scrollbar.app/">
+        <IconMouse class="h-[1em] w-[1em] grayscale" />
+        Scrollbar editor
+      </Button>
       <Button to="https://www.cssportal.com/css-triangle-generator/">
+        <IconTriangle class="h-[1em] w-[1em] grayscale" />
         Triangle Generator
       </Button>
     </div>
