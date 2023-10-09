@@ -447,7 +447,7 @@ const isFound = foo.some((x) => y.x === "foo")
 
 **Enforced with:** [typescript-eslint/prefer-includes](https://typescript-eslint.io/rules/prefer-includes/)
 
-### Prefer` Array.flatMap()` over `Array.map().flat()`
+### Prefer`Array.flatMap()` over `Array.map().flat()` 
 
 [Array.flatMap()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap) performs [Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [Array.flat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) in one step.
 
