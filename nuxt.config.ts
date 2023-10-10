@@ -71,7 +71,6 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
-    watcher: "chokidar",
   },
   nitro: {
     preset: "github-pages",
