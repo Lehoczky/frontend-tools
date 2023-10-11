@@ -8,7 +8,6 @@
     "format:check": "prettier \"./**\" --check --ignore-unknown",
     "format:write": "prettier \"./**\" --write --ignore-unknown",
     "build": "nuxt build",
-    "gh:deploy": "npm run build && gh-pages -d dist -t true",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
@@ -22,7 +21,6 @@
     "@vueuse/nuxt": "^10.5.0",
     "eslint": "^8.51.0",
     "eslint-define-config": "^1.24.1",
-    "gh-pages": "github:Lehoczky/gh-pages",
     "nuxt": "~3.7.4",
     "nuxt-simple-robots": "^3.1.6",
     "nuxt-simple-sitemap": "^3.4.0",
@@ -43,5 +41,5 @@
     "@nuxtjs/algolia": "^1.9.0",
     "lodash-es": "^4.17.21"
   },
-  "packageManager": "pnpm@8.7.3"
+  "packageManager": "pnpm@8.9.0"
 }
