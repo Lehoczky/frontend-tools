@@ -2,11 +2,16 @@ name: CI
 
 on:
   push:
-    # branches:
-    #   - master
-  # pull_request:
-  #   branches:
-  #     - master
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   ci:
@@ -35,9 +40,9 @@ jobs:
       - name: Build the site 🏗
         run: pnpm build
 
-      # - name: Deploy 🚀
-      #   if: github.ref == 'refs/heads/master'
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./dist
+      - name: Deploy 🚀
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
