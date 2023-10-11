@@ -35,9 +35,9 @@ jobs:
       - name: Build the site 🏗
         run: pnpm build
 
-      - name: Deploy 🚀
-        if: github.ref == 'refs/heads/master'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+      # - name: Deploy 🚀
+      #   if: github.ref == 'refs/heads/master'
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./dist
