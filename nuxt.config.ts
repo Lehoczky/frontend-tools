@@ -54,20 +54,14 @@ export default defineNuxtConfig({
     },
   },
   algolia: {
-    apiKey: process.env.ALGOLIA_API_KEY ?? "<MISSING-API-KEY>",
-    applicationId: process.env.ALGOLIA_APPLICATION_ID ?? "<MISSING-APP-ID>",
+    apiKey: process.env.ALGOLIA_API_KEY,
+    applicationId: process.env.ALGOLIA_APPLICATION_ID,
     docSearch: {
-      searchParameters: {
-        facetFilters: ["lang:en-US"],
-      },
       indexName: "frontend-tools",
     },
   },
-  robots: {
-    siteUrl: "https://lehoczky.github.io/frontend-tools/",
-  },
-  sitemap: {
-    siteUrl: "https://lehoczky.github.io/frontend-tools/",
+  site: {
+    url: "https://lehoczky.github.io/frontend-tools/",
   },
   experimental: {
     typedPages: true,
