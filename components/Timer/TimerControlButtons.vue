@@ -1,26 +1,26 @@
 <template>
-  <div class="relative h-12 w-12">
+  <div class="relative h-14 sm:w-28">
     <Transition name="slide-up">
       <Button
         v-if="!countingDown"
-        class="absolute !p-3 will-change-transform sm:px-6 sm:py-4"
+        class="absolute w-full justify-center !p-4 will-change-transform sm:h-full sm:px-6 sm:py-4"
         color="blue"
         :disabled="startDisabled"
         aria-label="Start"
         @click="emit('update:countingDown', true)"
       >
-        <span class="hidden sm:inline">Start</span>
+        <span class="text-2xl sm:text-lg">Start</span>
         <IconPlay class="h-9 w-9 sm:h-5 sm:w-5" />
       </Button>
 
       <Button
         v-else
-        class="absolute !p-3 will-change-transform sm:px-6 sm:py-4"
+        class="absolute w-full justify-center !p-4 will-change-transform sm:h-full sm:px-6 sm:py-4"
         color="red"
         aria-label="Pause"
         @click="emit('update:countingDown', false)"
       >
-        <span class="hidden sm:inline">Pause</span>
+        <span class="text-2xl sm:text-base">Pause</span>
         <IconPause class="h-9 w-9 sm:h-5 sm:w-5" />
       </Button>
     </Transition>
@@ -51,10 +51,10 @@ const emit = defineEmits<{
 }
 
 .slide-up-enter-from {
-  @apply translate-y-7 opacity-0;
+  @apply translate-y-5 opacity-0;
 }
 
 .slide-up-leave-to {
-  @apply -translate-y-7 opacity-0;
+  @apply -translate-y-5 opacity-0;
 }
 </style>

@@ -2,58 +2,68 @@
   <div>
     <h1 class="mb-article-heading text-3xl">Timer</h1>
 
-    <div class="mb-12 flex items-start gap-4 sm:mb-8 sm:flex-row sm:items-end">
-      <TimerInput v-model="rawValue" v-model:editing="editing">
-        <TimerDigit
-          :fade="editing && rawValue.length <= 5"
-          :hide="!editing && numbers[0] === 0 && rawValue.length <= 5"
-        >
-          {{ numbers[0] }}
-        </TimerDigit>
-        <TimerDigit
-          :fade="editing && rawValue.length <= 4"
-          :hide="!editing && numbers[1] === 0 && rawValue.length <= 4"
-        >
-          {{ numbers[1] }}
-        </TimerDigit>
-        <TimerCharacter
-          class="mr-2"
-          :fade="editing && rawValue.length <= 4"
-          :hide="!editing && numbers[1] === 0 && rawValue.length <= 4"
-        >
-          h
-        </TimerCharacter>
-        <TimerDigit
-          :fade="editing && rawValue.length <= 3"
-          :hide="!editing && numbers[2] === 0 && rawValue.length <= 3"
-        >
-          {{ numbers[2] }}
-        </TimerDigit>
-        <TimerDigit
-          :fade="editing && rawValue.length <= 2"
-          :hide="!editing && numbers[3] === 0 && rawValue.length <= 2"
-        >
-          {{ numbers[3] }}
-        </TimerDigit>
-        <TimerCharacter
-          class="mr-2"
-          :fade="editing && rawValue.length <= 2"
-          :hide="!editing && numbers[3] === 0 && rawValue.length <= 2"
-        >
-          m
-        </TimerCharacter>
-        <TimerDigit
-          :fade="editing && rawValue.length <= 1"
-          :hide="!editing && numbers[4] === 0 && rawValue.length <= 1"
-        >
-          {{ numbers[4] }}
-        </TimerDigit>
-        <TimerDigit :fade="editing && rawValue.length === 0">
-          {{ numbers[5] }}
-        </TimerDigit>
-        <TimerCharacter :fade="editing && rawValue.length === 0">
-          s
-        </TimerCharacter>
+    <div class="mb-12 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end">
+      <TimerInput v-model="rawValue">
+        <template #default="{ editing, caretPosition }">
+          <TimerDigit
+            :fade="editing && rawValue.length <= 5"
+            :hide="!editing && numbers[0] === 0 && rawValue.length <= 5"
+            :show-caret="editing && caretPosition === 5"
+          >
+            {{ numbers[0] }}
+          </TimerDigit>
+          <TimerDigit
+            :fade="editing && rawValue.length <= 4"
+            :hide="!editing && numbers[1] === 0 && rawValue.length <= 4"
+            :show-caret="editing && caretPosition === 4"
+          >
+            {{ numbers[1] }}
+          </TimerDigit>
+          <TimerCharacter
+            class="mr-2"
+            :fade="editing && rawValue.length <= 4"
+            :hide="!editing && numbers[1] === 0 && rawValue.length <= 4"
+          >
+            h
+          </TimerCharacter>
+          <TimerDigit
+            :fade="editing && rawValue.length <= 3"
+            :hide="!editing && numbers[2] === 0 && rawValue.length <= 3"
+            :show-caret="editing && caretPosition === 3"
+          >
+            {{ numbers[2] }}
+          </TimerDigit>
+          <TimerDigit
+            :fade="editing && rawValue.length <= 2"
+            :hide="!editing && numbers[3] === 0 && rawValue.length <= 2"
+            :show-caret="editing && caretPosition === 2"
+          >
+            {{ numbers[3] }}
+          </TimerDigit>
+          <TimerCharacter
+            class="mr-2"
+            :fade="editing && rawValue.length <= 2"
+            :hide="!editing && numbers[3] === 0 && rawValue.length <= 2"
+          >
+            m
+          </TimerCharacter>
+          <TimerDigit
+            :fade="editing && rawValue.length <= 1"
+            :hide="!editing && numbers[4] === 0 && rawValue.length <= 1"
+            :show-caret="editing && caretPosition === 1"
+          >
+            {{ numbers[4] }}
+          </TimerDigit>
+          <TimerDigit
+            :fade="editing && rawValue.length === 0"
+            :show-caret="editing && caretPosition === 0"
+          >
+            {{ numbers[5] }}
+          </TimerDigit>
+          <TimerCharacter :fade="editing && rawValue.length === 0">
+            s
+          </TimerCharacter>
+        </template>
       </TimerInput>
 
       <TimerControlButtons
@@ -97,7 +107,6 @@
 import { MAX_INPUT_LENGTH } from "@/components/Timer/TimerInput.vue"
 
 const rawValue = ref("")
-const editing = ref(false)
 const title = ref("Timer")
 
 const countingDown = ref(false)
