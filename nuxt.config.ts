@@ -54,8 +54,8 @@ export default defineNuxtConfig({
     },
   },
   algolia: {
-    apiKey: process.env.ALGOLIA_API_KEY,
-    applicationId: process.env.ALGOLIA_APPLICATION_ID,
+    apiKey: "a753fe26210f0d0a7b0508fa1dca926b",
+    applicationId: "9ZUSJ4EJ0L",
     docSearch: {
       indexName: "frontend-tools",
     },
