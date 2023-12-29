@@ -3,7 +3,11 @@
     <h1 class="mb-article-heading text-3xl">Timer</h1>
 
     <div class="mb-12 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end">
-      <TimerInput v-model="rawValue">
+      <TimerInput
+        v-model="rawValue"
+        @keyup.enter="startCountdown"
+        @keyup.space="startCountdown"
+      >
         <template #default="{ editing, caretPosition }">
           <TimerDigit
             :fade="editing && rawValue.length <= 5"
@@ -181,6 +185,10 @@ const secondsToRawValue = (totalSeconds: number) => {
 const startButtonDisabled = computed(
   () => countingDown.value || parsedSeconds.value === 0,
 )
+
+function startCountdown() {
+  countingDown.value = true
+}
 
 const showNotificationAndStartBeeping = () => {
   showNotification.value = true

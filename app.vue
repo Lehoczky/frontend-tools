@@ -19,5 +19,4 @@ useHead({
 useSeoMeta({
   description: "Collection of utilities to make frontend development easier.",
 })
-defineRobotMeta()
 </script>

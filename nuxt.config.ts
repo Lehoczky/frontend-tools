@@ -25,8 +25,6 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxtjs/google-fonts",
     "@nuxtjs/algolia",
-    "nuxt-simple-robots",
-    "nuxt-simple-sitemap",
   ],
   typescript: {
     shim: false,
@@ -59,9 +57,6 @@ export default defineNuxtConfig({
     docSearch: {
       indexName: "frontend-tools",
     },
-  },
-  site: {
-    url: "https://lehoczky.github.io/frontend-tools/",
   },
   experimental: {
     typedPages: true,
