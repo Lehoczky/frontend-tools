@@ -5,6 +5,7 @@
     <div class="mb-12 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end">
       <TimerInput
         v-model="rawValue"
+        :disabled="countingDown"
         @keyup.enter="startCountdown"
         @keyup.space="startCountdown"
       >

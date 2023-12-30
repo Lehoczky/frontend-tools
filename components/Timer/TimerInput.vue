@@ -14,6 +14,7 @@
       type="tel"
       class="sr-only"
       :maxlength="MAX_INPUT_LENGTH"
+      :disabled="disabled"
       @keypress="preventNonNumericInput($event)"
       @keydown.left="moveCaretLeft()"
       @keydown.right="moveCaretRight()"
@@ -29,9 +30,11 @@ export const MAX_INPUT_LENGTH = 6
 
 <script setup lang="ts">
 interface Props {
+  disabled?: boolean
   modelValue?: string
 }
 const props = withDefaults(defineProps<Props>(), {
+  disabled: false,
   modelValue: undefined,
 })
 
