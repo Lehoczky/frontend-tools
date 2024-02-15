@@ -44,7 +44,6 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     preload: true,
-    download: false,
     families: {
       Poppins: {
         wght: [400, 500, 600],
