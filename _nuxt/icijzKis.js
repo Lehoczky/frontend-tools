@@ -1,0 +1,1 @@
+import{_ as n}from"./D1XPcPb4.js";import{g as a,o,n as s,w as f,r as l}from"./jRogRora.js";const p=a({__name:"ProseA",props:{href:{type:String,default:""},target:{type:String,default:"_blank",required:!1}},setup(t){return(e,_)=>{const r=n;return o(),s(r,{to:t.href,target:t.target},{default:f(()=>[l(e.$slots,"default")]),_:3},8,["to","target"])}}});export{p as default};
