@@ -3,12 +3,12 @@ export default (callback: () => void) => {
 
   onMounted(() => {
     worker = createWorker(() => {
-      let interval: ReturnType<typeof setInterval> | undefined = undefined
+      let interval: number | undefined = undefined
 
       self.addEventListener("message", (event) => {
         switch (event.data) {
           case "start":
-            interval = global.setInterval(() => self.postMessage("tick"), 1000)
+            interval = self.setInterval(() => self.postMessage("tick"), 1000)
             break
           case "pause":
             clearInterval(interval)
