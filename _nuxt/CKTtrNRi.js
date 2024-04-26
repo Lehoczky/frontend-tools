@@ -1,1 +1,0 @@
-import{_ as o,o as r,c as t,r as c}from"./DHf92nsS.js";const s={},n={class:"border-l-4 border-zinc-700 pl-6 text-zinc-400"};function l(e,a){return r(),t("blockquote",n,[c(e.$slots,"default")])}const d=o(s,[["render",l]]);export{d as default};
