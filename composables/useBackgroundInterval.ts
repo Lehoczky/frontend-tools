@@ -8,7 +8,7 @@ export default (callback: () => void) => {
       self.addEventListener("message", (event) => {
         switch (event.data) {
           case "start":
-            interval = setInterval(() => self.postMessage("tick"), 1000)
+            interval = global.setInterval(() => self.postMessage("tick"), 1000)
             break
           case "pause":
             clearInterval(interval)

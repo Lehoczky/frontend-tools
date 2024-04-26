@@ -59,6 +59,7 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
+    payloadExtraction: false,
   },
   nitro: {
     preset: "github-pages",
