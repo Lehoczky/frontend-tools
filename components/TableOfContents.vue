@@ -42,12 +42,10 @@ function isActiveLink(id: string) {
   return activeHeadings.value.includes(id)
 }
 
-if (process.client) {
-  setTimeout(() => {
-    updateHeadings([
-      ...document.querySelectorAll("h1"),
-      ...document.querySelectorAll("h2"),
-    ])
-  }, 300)
-}
+onMounted(() => {
+  updateHeadings([
+    ...document.querySelectorAll("h1"),
+    ...document.querySelectorAll("h2"),
+  ])
+})
 </script>
