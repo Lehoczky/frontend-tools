@@ -1,1 +1,0 @@
-import{_ as s,o as c,c as t,r as o}from"./BXPlgg2r.js";const r={},a={class:"list-disc space-y-2 pl-5"};function n(e,l){return c(),t("ul",a,[o(e.$slots,"default",{},void 0,!0)])}const d=s(r,[["render",n],["__scopeId","data-v-6a9351c6"]]);export{d as default};
