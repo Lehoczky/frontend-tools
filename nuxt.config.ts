@@ -19,22 +19,27 @@ export default defineNuxtConfig({
       },
     },
   },
+
   css: ["@/assets/css/main.css", "@/assets/css/tailwind.css"],
+
   modules: [
     "@vueuse/nuxt",
     "@nuxt/content",
     "@nuxtjs/google-fonts",
     "@nuxtjs/algolia",
   ],
+
   typescript: {
     shim: false,
     strict: false,
   },
+
   content: {
     highlight: {
       theme: "dark-plus",
     },
   },
+
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -42,6 +47,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   googleFonts: {
     preload: true,
     families: {
@@ -50,6 +56,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   algolia: {
     apiKey: "a753fe26210f0d0a7b0508fa1dca926b",
     applicationId: "9ZUSJ4EJ0L",
@@ -57,11 +64,15 @@ export default defineNuxtConfig({
       indexName: "frontend-tools",
     },
   },
+
   experimental: {
     typedPages: true,
     payloadExtraction: false,
   },
+
   nitro: {
     preset: "github-pages",
   },
+
+  compatibilityDate: "2025-01-25",
 })
