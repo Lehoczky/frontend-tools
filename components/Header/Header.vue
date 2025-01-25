@@ -1,3 +1,14 @@
+<script setup lang="ts">
+const open = ref(false)
+
+const { body } = useBody()
+const isLocked = useScrollLock(body)
+
+watch(open, (isOpen) => {
+  isLocked.value = isOpen
+})
+</script>
+
 <template>
   <header
     class="sticky top-0 z-50 flex h-16 items-center bg-base-500 p-2.5 shadow-header sm:h-auto sm:opacity-95"
@@ -59,14 +70,3 @@
     </nav>
   </header>
 </template>
-
-<script setup lang="ts">
-const open = ref(false)
-
-const { body } = useBody()
-const isLocked = useScrollLock(body)
-
-watch(open, (isOpen) => {
-  isLocked.value = isOpen
-})
-</script>

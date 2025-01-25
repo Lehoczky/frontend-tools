@@ -1,3 +1,12 @@
+<script setup>
+defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+})
+</script>
+
 <template>
   <h3 :id="id" class="group mb-3 mt-8 scroll-mt-20 text-2xl font-semibold">
     <NuxtLink :to="`#${id}`">
@@ -8,12 +17,3 @@
     </NuxtLink>
   </h3>
 </template>
-
-<script setup>
-defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-})
-</script>

@@ -1,3 +1,13 @@
+<script setup lang="ts">
+const isOpen = ref(false)
+
+function preventTextSelectionOnDbClick(event: MouseEvent) {
+  if (event.detail > 1) {
+    event.preventDefault()
+  }
+}
+</script>
+
 <template>
   <div class="my-4 rounded-lg border border-base-400 bg-base-600 p-4">
     <div
@@ -37,16 +47,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-const isOpen = ref(false)
-
-function preventTextSelectionOnDbClick(event: MouseEvent) {
-  if (event.detail > 1) {
-    event.preventDefault()
-  }
-}
-</script>
 
 <style scoped>
 :deep(.summary p) {

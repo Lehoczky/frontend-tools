@@ -1,29 +1,3 @@
-<template>
-  <div
-    class="flex cursor-text justify-center rounded-md bg-base-500 px-5 py-4 text-4xl outline-none ring-gray-600 focus-within:ring sm:justify-normal"
-    :class="{
-      'text-opacity-50': editing,
-    }"
-    @click="focusInput"
-  >
-    <slot :editing="editing" :caret-position="caretPosition" />
-
-    <input
-      ref="input"
-      v-model="value"
-      type="tel"
-      class="sr-only"
-      :maxlength="MAX_INPUT_LENGTH"
-      :disabled="disabled"
-      @keypress="preventNonNumericInput($event)"
-      @keydown.left="moveCaretLeft()"
-      @keydown.right="moveCaretRight()"
-      @focus="onFocus()"
-      @blur="onBlur()"
-    />
-  </div>
-</template>
-
 <script lang="ts">
 export const MAX_INPUT_LENGTH = 6
 </script>
@@ -85,3 +59,29 @@ function onBlur() {
   caretPosition.value = 0
 }
 </script>
+
+<template>
+  <div
+    class="flex cursor-text justify-center rounded-md bg-base-500 px-5 py-4 text-4xl outline-none ring-gray-600 focus-within:ring sm:justify-normal"
+    :class="{
+      'text-opacity-50': editing,
+    }"
+    @click="focusInput"
+  >
+    <slot :editing="editing" :caret-position="caretPosition" />
+
+    <input
+      ref="input"
+      v-model="value"
+      type="tel"
+      class="sr-only"
+      :maxlength="MAX_INPUT_LENGTH"
+      :disabled="disabled"
+      @keypress="preventNonNumericInput($event)"
+      @keydown.left="moveCaretLeft()"
+      @keydown.right="moveCaretRight()"
+      @focus="onFocus()"
+      @blur="onBlur()"
+    />
+  </div>
+</template>

@@ -1,13 +1,3 @@
-<template>
-  <div>
-    <LoadingIndicator />
-    <Header />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
-</template>
-
 <script setup lang="ts">
 const PAGE_TITLE = "Frontend Tools"
 
@@ -20,3 +10,13 @@ useSeoMeta({
   description: "Collection of utilities to make frontend development easier.",
 })
 </script>
+
+<template>
+  <div>
+    <LoadingIndicator />
+    <Header />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
+</template>

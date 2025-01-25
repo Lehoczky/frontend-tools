@@ -1,24 +1,3 @@
-<template>
-  <div class="relative inline-block">
-    <input
-      v-bind="$attrs"
-      v-model="value"
-      :inputmode="inputmode"
-      type="text"
-      class="w-full rounded-md bg-base-500 px-5 py-3 text-center !leading-none outline-none ring-gray-500 focus:ring"
-      @keydown="handleKeydownEvent($event)"
-      @click.ctrl="copyValueWithSuffix()"
-    />
-
-    <div
-      v-if="suffix"
-      class="absolute right-6 top-1/2 -translate-y-1/2 text-lg leading-none"
-    >
-      {{ suffix }}
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 import { endsWithDot, hasOneDot, startsWithDigit } from "~~/utils"
 
@@ -62,7 +41,7 @@ const value = computed<number>({
     }
 
     const number = value ? Number(replaceDecimals(value)) : undefined
-    if (isNaN(number)) {
+    if (Number.isNaN(number)) {
       // Something wrong has been typed in, but we don't want to clear
       // the input, so we pretend nothing happened
     } else {
@@ -99,3 +78,24 @@ const isTryingToTypeFloatNumber = (value: string): boolean => {
 
 const replaceDecimals = (value: unknown) => String(value).replace(",", ".")
 </script>
+
+<template>
+  <div class="relative inline-block">
+    <input
+      v-bind="$attrs"
+      v-model="value"
+      :inputmode="inputmode"
+      type="text"
+      class="w-full rounded-md bg-base-500 px-5 py-3 text-center !leading-none outline-none ring-gray-500 focus:ring"
+      @keydown="handleKeydownEvent($event)"
+      @click.ctrl="copyValueWithSuffix()"
+    />
+
+    <div
+      v-if="suffix"
+      class="absolute right-6 top-1/2 -translate-y-1/2 text-lg leading-none"
+    >
+      {{ suffix }}
+    </div>
+  </div>
+</template>

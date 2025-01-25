@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "lint": "npm run eslint:check && npm run format:check",
-    "eslint:check": "eslint . --ext .js,.ts,.vue --max-warnings=0",
+    "eslint:check": "eslint . --max-warnings=0",
     "format:check": "prettier \"./**\" --check --ignore-unknown",
     "format:write": "prettier \"./**\" --write --ignore-unknown",
     "build": "nuxt build",

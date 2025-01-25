@@ -1,3 +1,12 @@
+<script setup>
+defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+})
+</script>
+
 <template>
   <h2
     :id="id"
@@ -11,12 +20,3 @@
     </NuxtLink>
   </h2>
 </template>
-
-<script setup>
-defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-})
-</script>

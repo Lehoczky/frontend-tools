@@ -1,9 +1,3 @@
-<template>
-  <InlineLink :to="href" :target="target">
-    <slot />
-  </InlineLink>
-</template>
-
 <script setup lang="ts">
 defineProps({
   href: {
@@ -17,3 +11,9 @@ defineProps({
   },
 })
 </script>
+
+<template>
+  <InlineLink :to="href" :target="target">
+    <slot />
+  </InlineLink>
+</template>

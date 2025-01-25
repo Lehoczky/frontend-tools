@@ -1,9 +1,3 @@
-<template>
-  <fieldset>
-    <slot />
-  </fieldset>
-</template>
-
 <script setup lang="ts">
 import { RadioGroupContext } from "./context"
 
@@ -29,3 +23,9 @@ provide(RadioGroupContext, {
   },
 })
 </script>
+
+<template>
+  <fieldset>
+    <slot />
+  </fieldset>
+</template>

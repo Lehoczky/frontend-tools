@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import useRadioGroupContext from "./context"
+
+const props = defineProps<{ value: any }>()
+const context = useRadioGroupContext("RadioGroupOption")
+
+const checked = computed(() => context.value.value === props.value)
+</script>
+
 <template>
   <label class="cursor-pointer">
     <input
@@ -11,12 +20,3 @@
     <span><slot /></span>
   </label>
 </template>
-
-<script setup lang="ts">
-import useRadioGroupContext from "./context"
-
-const props = defineProps<{ value: any }>()
-const context = useRadioGroupContext("RadioGroupOption")
-
-const checked = computed(() => context.value.value === props.value)
-</script>

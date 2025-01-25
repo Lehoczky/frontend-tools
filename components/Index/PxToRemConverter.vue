@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { toPX, toREMWithFixedPrecision } from "~~/utils"
+
+const leftInput = ref<number>()
+const rightInput = ref<number>()
+const showPXInLeftInput = ref(true)
+
+const updateLeftInput = (value: number) => {
+  leftInput.value = value
+
+  const converter = showPXInLeftInput.value ? toREMWithFixedPrecision : toPX
+  rightInput.value = value === undefined ? undefined : converter(value)
+}
+
+const updateRightInput = (value: number) => {
+  rightInput.value = value
+
+  const converter = showPXInLeftInput.value ? toPX : toREMWithFixedPrecision
+  leftInput.value = value === undefined ? undefined : converter(value)
+}
+
+const switchValues = () => {
+  showPXInLeftInput.value = !showPXInLeftInput.value
+  updateLeftInput(leftInput.value)
+}
+</script>
+
 <template>
   <article class="p-article">
     <h2 class="mb-article-heading text-3xl">PX to REM converter</h2>
@@ -29,30 +56,3 @@
     </div>
   </article>
 </template>
-
-<script setup lang="ts">
-import { toPX, toREMWithFixedPrecision } from "~~/utils"
-
-const leftInput = ref<number>()
-const rightInput = ref<number>()
-const showPXInLeftInput = ref(true)
-
-const updateLeftInput = (value: number) => {
-  leftInput.value = value
-
-  const converter = showPXInLeftInput.value ? toREMWithFixedPrecision : toPX
-  rightInput.value = value === undefined ? undefined : converter(value)
-}
-
-const updateRightInput = (value: number) => {
-  rightInput.value = value
-
-  const converter = showPXInLeftInput.value ? toPX : toREMWithFixedPrecision
-  leftInput.value = value === undefined ? undefined : converter(value)
-}
-
-const switchValues = () => {
-  showPXInLeftInput.value = !showPXInLeftInput.value
-  updateLeftInput(leftInput.value)
-}
-</script>

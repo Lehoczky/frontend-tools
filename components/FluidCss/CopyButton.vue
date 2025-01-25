@@ -1,3 +1,14 @@
+<script setup>
+const props = defineProps({
+  text: {
+    type: String,
+    required: true,
+  },
+})
+
+const { copy, copied } = useClipboard({ source: toRef(props, "text") })
+</script>
+
 <template>
   <button
     class="text-code-natural hover:text-white active:scale-90"
@@ -10,14 +21,3 @@
     </TransitionFade>
   </button>
 </template>
-
-<script setup>
-const props = defineProps({
-  text: {
-    type: String,
-    required: true,
-  },
-})
-
-const { copy, copied } = useClipboard({ source: toRef(props, "text") })
-</script>

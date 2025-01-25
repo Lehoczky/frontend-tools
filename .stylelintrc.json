@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-recommended-vue",
-    "stylelint-config-tailwindcss"
-  ],
-  "ignoreFiles": [".output/**", "dist/**"]
-}

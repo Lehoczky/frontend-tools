@@ -1,14 +1,3 @@
-<template>
-  <div
-    :class="{
-      'opacity-50': fade,
-      'opacity-0': hide,
-    }"
-  >
-    <slot />
-  </div>
-</template>
-
 <script setup>
 defineProps({
   fade: {
@@ -21,3 +10,14 @@ defineProps({
   },
 })
 </script>
+
+<template>
+  <div
+    :class="{
+      'opacity-50': fade,
+      'opacity-0': hide,
+    }"
+  >
+    <slot />
+  </div>
+</template>

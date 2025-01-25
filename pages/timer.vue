@@ -1,3 +1,97 @@
+<script setup lang="ts">
+import { MAX_INPUT_LENGTH } from "@/components/Timer/TimerInput.vue"
+
+const rawValue = ref("")
+const title = ref("Timer")
+
+const countingDown = ref(false)
+const showNotification = ref(false)
+const beep = useBeeping()
+
+useHead({ title })
+
+const numbers = computed(() => {
+  const valueAsNumbers = Array.from(rawValue.value, Number)
+  const numOfLeadingZeros = MAX_INPUT_LENGTH - rawValue.value.length
+  const leadingZeros = new Array(numOfLeadingZeros).fill(
+    0,
+    0,
+    numOfLeadingZeros,
+  )
+  return [...leadingZeros, ...valueAsNumbers]
+})
+
+const parsedSeconds = computed(() => {
+  const [h1, h2, m1, m2, s1, s2] = numbers.value
+  const hours = h1 * 10 + h2
+  const minutes = m1 * 10 + m2
+  const seconds = s1 * 10 + s2
+  return hours * 60 * 60 + minutes * 60 + seconds
+})
+
+const decrementTime = () => {
+  if (parsedSeconds.value > 1) {
+    const seconds = parsedSeconds.value - 1
+    rawValue.value = secondsToRawValue(seconds)
+    title.value = `${secondsInReadableForm(seconds)}`
+  } else {
+    countingDown.value = false
+    rawValue.value = ""
+    showNotificationAndStartBeeping()
+  }
+}
+
+const { startInterval, pauseInterval } = useBackgroundInterval(decrementTime)
+
+watch(countingDown, (newValue) => {
+  if (newValue) {
+    beep.load()
+    const time = secondsInReadableForm(parsedSeconds.value)
+    title.value = `${time}`
+    startInterval()
+  } else {
+    title.value = "Timer"
+    pauseInterval()
+  }
+})
+
+const secondsInReadableForm = (totalSeconds: number) => {
+  const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
+
+  return [hours, minutes, seconds]
+    .map((v) => (v < 10 ? `0${v}` : v))
+    .filter((v, i) => v !== "00" || i > 0)
+    .join(":")
+}
+
+const secondsToRawValue = (totalSeconds: number) => {
+  const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
+  const timeAsStringWithLeadingZeros = [hours, minutes, seconds]
+    .map((v) => (v < 10 ? `0${v}` : v))
+    .join("")
+
+  return dropLeadingZeros(timeAsStringWithLeadingZeros)
+}
+
+const startButtonDisabled = computed(
+  () => countingDown.value || parsedSeconds.value === 0,
+)
+
+function startCountdown() {
+  countingDown.value = true
+}
+
+const showNotificationAndStartBeeping = () => {
+  showNotification.value = true
+  beep.resume()
+}
+
+const closeNotificationAndStopBeeping = () => {
+  showNotification.value = false
+  beep.pause()
+}
+</script>
+
 <template>
   <div>
     <h1 class="mb-article-heading text-3xl">Timer</h1>
@@ -107,97 +201,3 @@
     </TransitionSlideInLeft>
   </div>
 </template>
-
-<script setup lang="ts">
-import { MAX_INPUT_LENGTH } from "@/components/Timer/TimerInput.vue"
-
-const rawValue = ref("")
-const title = ref("Timer")
-
-const countingDown = ref(false)
-const showNotification = ref(false)
-const beep = useBeeping()
-
-useHead({ title })
-
-const numbers = computed(() => {
-  const valueAsNumbers = Array.from(rawValue.value, Number)
-  const numOfLeadingZeros = MAX_INPUT_LENGTH - rawValue.value.length
-  const leadingZeros = new Array(numOfLeadingZeros).fill(
-    0,
-    0,
-    numOfLeadingZeros,
-  )
-  return [...leadingZeros, ...valueAsNumbers]
-})
-
-const parsedSeconds = computed(() => {
-  const [h1, h2, m1, m2, s1, s2] = numbers.value
-  const hours = h1 * 10 + h2
-  const minutes = m1 * 10 + m2
-  const seconds = s1 * 10 + s2
-  return hours * 60 * 60 + minutes * 60 + seconds
-})
-
-const decrementTime = () => {
-  if (parsedSeconds.value > 1) {
-    const seconds = parsedSeconds.value - 1
-    rawValue.value = secondsToRawValue(seconds)
-    title.value = `${secondsInReadableForm(seconds)}`
-  } else {
-    countingDown.value = false
-    rawValue.value = ""
-    showNotificationAndStartBeeping()
-  }
-}
-
-const { startInterval, pauseInterval } = useBackgroundInterval(decrementTime)
-
-watch(countingDown, (newValue) => {
-  if (newValue) {
-    beep.load()
-    const time = secondsInReadableForm(parsedSeconds.value)
-    title.value = `${time}`
-    startInterval()
-  } else {
-    title.value = "Timer"
-    pauseInterval()
-  }
-})
-
-const secondsInReadableForm = (totalSeconds: number) => {
-  const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
-
-  return [hours, minutes, seconds]
-    .map((v) => (v < 10 ? `0${v}` : v))
-    .filter((v, i) => v !== "00" || i > 0)
-    .join(":")
-}
-
-const secondsToRawValue = (totalSeconds: number) => {
-  const { hours, minutes, seconds } = secondsToDuration(totalSeconds)
-  const timeAsStringWithLeadingZeros = [hours, minutes, seconds]
-    .map((v) => (v < 10 ? `0${v}` : v))
-    .join("")
-
-  return dropLeadingZeros(timeAsStringWithLeadingZeros)
-}
-
-const startButtonDisabled = computed(
-  () => countingDown.value || parsedSeconds.value === 0,
-)
-
-function startCountdown() {
-  countingDown.value = true
-}
-
-const showNotificationAndStartBeeping = () => {
-  showNotification.value = true
-  beep.resume()
-}
-
-const closeNotificationAndStopBeeping = () => {
-  showNotification.value = false
-  beep.pause()
-}
-</script>

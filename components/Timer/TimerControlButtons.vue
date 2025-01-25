@@ -1,3 +1,20 @@
+<script setup lang="ts">
+defineProps({
+  countingDown: {
+    type: Boolean,
+    default: false,
+  },
+  startDisabled: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const emit = defineEmits<{
+  (event: "update:countingDown", value: boolean): void
+}>()
+</script>
+
 <template>
   <div class="relative h-14 sm:w-28">
     <Transition name="slide-up">
@@ -26,23 +43,6 @@
     </Transition>
   </div>
 </template>
-
-<script setup lang="ts">
-defineProps({
-  countingDown: {
-    type: Boolean,
-    default: false,
-  },
-  startDisabled: {
-    type: Boolean,
-    default: false,
-  },
-})
-
-const emit = defineEmits<{
-  (event: "update:countingDown", value: boolean): void
-}>()
-</script>
 
 <style scoped>
 .slide-up-enter-active,

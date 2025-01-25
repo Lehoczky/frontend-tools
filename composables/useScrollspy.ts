@@ -8,7 +8,7 @@ export default () => {
   const activeHeadings = ref<string[]>([])
 
   function observerCallback(entries: IntersectionObserverEntry[]) {
-    entries.forEach((entry) => {
+    for (const entry of entries) {
       const id = entry.target.id
 
       if (entry.isIntersecting) {
@@ -18,13 +18,13 @@ export default () => {
           (heading) => heading !== id,
         )
       }
-    })
+    }
   }
 
   function updateHeadings(headings: Element[]) {
-    headings.forEach((heading) => {
+    for (const heading of headings) {
       observer.value.observe(heading)
-    })
+    }
   }
 
   watch(

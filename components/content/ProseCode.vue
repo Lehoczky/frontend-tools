@@ -1,11 +1,3 @@
-<template>
-  <div
-    class="my-6 w-full overflow-hidden rounded-lg border border-zinc-900 bg-zinc-900 text-sm"
-  >
-    <slot />
-  </div>
-</template>
-
 <script setup lang="ts">
 import type { Lang } from "shiki-es"
 import type { PropType } from "vue"
@@ -29,6 +21,14 @@ defineProps({
   },
 })
 </script>
+
+<template>
+  <div
+    class="my-6 w-full overflow-hidden rounded-lg border border-zinc-900 bg-zinc-900 text-sm"
+  >
+    <slot />
+  </div>
+</template>
 
 <style scoped>
 :deep(pre) {

@@ -1,3 +1,10 @@
+<script setup>
+definePageMeta({
+  title: "Style Guide",
+  layout: "style-guide",
+})
+</script>
+
 <template>
   <ContentDoc v-slot="{ doc }">
     <div
@@ -12,10 +19,3 @@
     </div>
   </ContentDoc>
 </template>
-
-<script setup>
-definePageMeta({
-  title: "Style Guide",
-  layout: "style-guide",
-})
-</script>
